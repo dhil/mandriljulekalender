@@ -87,6 +87,8 @@ namespace Mandrilkalender
 
 		private void OnTapped()
 		{
+			// TODO: Indsæt tjek for om den pågældende låge må åbnes på denne dag.
+
 			App.GateService.OpenGate(this.gate);
 
 			flipper.FlipOnTap = false;
