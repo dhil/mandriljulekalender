@@ -5,7 +5,7 @@ Mandriljulekalender
 
 * [ ] Skedulering af notificationer
  - [ ] Der mangler implementation af INotificationService i .Droid projektet.
- - [ ] Skedulering forslår jeg laves i App.xaml.cs.
+ - [X] Skedulering forslår jeg laves i App.xaml.cs.
 * [ ] Regl for hvornår hver enkelt låge må åbnes.
  - [ ] Codepointer: GateControl#OnTapped().
 * [ ] Implementation af lyd når appen åbner samt når en notifikation vises.
