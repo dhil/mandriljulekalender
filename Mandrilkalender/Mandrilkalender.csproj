@@ -52,6 +52,7 @@
     <Compile Include="Views\VideoPage.cs" />
     <Compile Include="Controls\MandrilContentView.cs" />
     <Compile Include="Services\INotificationService.cs" />
+    <Compile Include="Models\MandrilNotification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

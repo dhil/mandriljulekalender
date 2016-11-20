@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Foundation;
 using Mandrilkalender.iOS;
 using UIKit;
@@ -10,13 +11,46 @@ namespace Mandrilkalender.iOS
 	{
 		public void ScheduleNotification(string title, string body, DateTime time)
 		{
-			UILocalNotification notification = new UILocalNotification();
+			UILocalNotification notification = new UILocalNotification()
+			{
+				AlertAction = "Vis",
+				AlertTitle = title,
+				AlertBody = $"{title}\n{body}",
+				ApplicationIconBadgeNumber = 1,
+				FireDate = time.ToNSDate()
+			};
 
-			notification.AlertAction = "Vis";
-			notification.AlertBody = $"{title}\n{body}";
-			notification.ApplicationIconBadgeNumber = UIApplication.SharedApplication.ApplicationIconBadgeNumber + 1;
-			notification.FireDate = time.ToNSDate();
 			UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+		}
+
+		public List<MandrilNotification> GetScheduledNotifications()
+		{
+			var notifications = UIApplication.SharedApplication.ScheduledLocalNotifications;
+
+			var scheduledNotifications = new List<MandrilNotification>();
+
+			foreach (var notification in notifications)
+			{
+				scheduledNotifications.Add(notification.ToMandrilNotification());
+			}
+
+			return scheduledNotifications;
+		}
+
+		public bool IsNotificationScheduled(DateTime date)
+		{
+			var notifications = UIApplication.SharedApplication.ScheduledLocalNotifications;
+			var scheduledNotifications = new List<MandrilNotification>();
+
+			foreach (var notification in notifications)
+			{
+				if (notification.FireDate.ToDateTime().Date == date.Date)
+				{
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 }
