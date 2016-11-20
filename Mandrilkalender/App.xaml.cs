@@ -67,9 +67,7 @@ namespace Mandrilkalender
 						GetNotificationText(i),
 						iDate);
 				}
-				else {
-					Debug.WriteLine($"{i} skipped");
-				}
+
 				iDate = iDate.AddDays(1);
 			}
 		}
