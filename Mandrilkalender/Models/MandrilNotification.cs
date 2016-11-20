@@ -1,10 +1,10 @@
 ﻿using System;
 namespace Mandrilkalender
 {
-	public class Notification
+	public class MandrilNotification
 	{
-		public Notification()
-		{
-		}
+		public string Title { get; set; }
+		public string Content { get; set; }
+		public DateTime FireDate { get; set; }
 	}
 }
