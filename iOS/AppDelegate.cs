@@ -49,15 +49,16 @@ namespace Mandrilkalender.iOS
 					if (localNotification != null)
 					{
 						UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
-						okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+						okayAlertController.AddAction(UIAlertAction.Create("For dulan, lad mig da se!", UIAlertActionStyle.Default, null));
 
 						UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
 
-						// reset our badge
-						UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 					}
 				}
 			}
+
+			// reset our badge
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 
 			return base.FinishedLaunching(app, options);
 		}
@@ -66,7 +67,7 @@ namespace Mandrilkalender.iOS
 		{
 			// show an alert
 			UIAlertController okayAlertController = UIAlertController.Create(notification.AlertAction, notification.AlertBody, UIAlertControllerStyle.Alert);
-			okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+			okayAlertController.AddAction(UIAlertAction.Create("For dulan, lad mig da se!", UIAlertActionStyle.Default, null));
 
 			UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(okayAlertController, true, null);
 

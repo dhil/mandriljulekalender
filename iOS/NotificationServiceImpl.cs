@@ -9,38 +9,9 @@ namespace Mandrilkalender.iOS
 {
 	public class NotificationServiceImpl : INotificationService
 	{
-		public void ScheduleNotification(string title, string body, DateTime time)
-		{
-			UILocalNotification notification = new UILocalNotification()
-			{
-				AlertAction = "Vis",
-				AlertTitle = title,
-				AlertBody = $"{title}\n{body}",
-				ApplicationIconBadgeNumber = 1,
-				FireDate = time.ToNSDate()
-			};
-
-			UIApplication.SharedApplication.ScheduleLocalNotification(notification);
-		}
-
-		public List<MandrilNotification> GetScheduledNotifications()
+		private bool IsNotificationScheduled(DateTime date)
 		{
 			var notifications = UIApplication.SharedApplication.ScheduledLocalNotifications;
-
-			var scheduledNotifications = new List<MandrilNotification>();
-
-			foreach (var notification in notifications)
-			{
-				scheduledNotifications.Add(notification.ToMandrilNotification());
-			}
-
-			return scheduledNotifications;
-		}
-
-		public bool IsNotificationScheduled(DateTime date)
-		{
-			var notifications = UIApplication.SharedApplication.ScheduledLocalNotifications;
-			var scheduledNotifications = new List<MandrilNotification>();
 
 			foreach (var notification in notifications)
 			{
@@ -51,6 +22,28 @@ namespace Mandrilkalender.iOS
 			}
 
 			return false;
+		}
+
+		public void ScheduleNotification(DateTime dateTime)
+		{
+			if (IsNotificationScheduled(dateTime))
+			{
+				return;
+			}
+
+			var title = $"Glædelig {dateTime.Day}. december";
+			var content = $"Hvad mon venter bag låge nummer {dateTime.Day}?";
+			UILocalNotification notification = new UILocalNotification()
+			{
+				AlertAction = "Vis",
+				AlertTitle = title,
+				AlertBody = $"{content}",
+				ApplicationIconBadgeNumber = 1,
+				FireDate = dateTime.ToNSDate(),
+				SoundName = "intro.caf"
+			};
+
+			UIApplication.SharedApplication.ScheduleLocalNotification(notification);
 		}
 	}
 }

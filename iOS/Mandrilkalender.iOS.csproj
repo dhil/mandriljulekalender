@@ -161,7 +161,6 @@
     <Compile Include="VideoPlayerRenderer.cs" />
     <Compile Include="NotificationServiceImpl.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
-    <Compile Include="Extensions\NotificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\a.png" />
@@ -197,9 +196,6 @@
     <BundleResource Include="Resources\i.png" />
     <BundleResource Include="Resources\i%402x.png" />
     <BundleResource Include="Resources\i%403x.png" />
-    <BundleResource Include="Resources\icon.png" />
-    <BundleResource Include="Resources\icon%402x.png" />
-    <BundleResource Include="Resources\icon%403x.png" />
     <BundleResource Include="Resources\j.png" />
     <BundleResource Include="Resources\j%402x.png" />
     <BundleResource Include="Resources\j%403x.png" />
@@ -251,6 +247,10 @@
     <BundleResource Include="Resources\y.png" />
     <BundleResource Include="Resources\y%402x.png" />
     <BundleResource Include="Resources\y%403x.png" />
+    <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\icon%402x.png" />
+    <BundleResource Include="Resources\icon%403x.png" />
+    <BundleResource Include="Resources\intro.caf" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
