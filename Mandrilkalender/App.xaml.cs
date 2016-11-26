@@ -18,18 +18,18 @@ namespace Mandrilkalender
 
 			MainPage = new Gates();
 
-			ScheduleNotifications();
+			//ScheduleNotifications();
 
-			var scheduledNotifications = DependencyService.Get<INotificationService>().GetScheduledNotifications();
-			var i = 1;
-			foreach (var n in scheduledNotifications)
-			{
-				Debug.WriteLine($"{i++}");
-				Debug.WriteLine($"{n.Title}");
-				Debug.WriteLine($"{n.Content}");
-				Debug.WriteLine($"{n.FireDate.ToString("s")}");
-				Debug.WriteLine("------\n");
-			}
+			//var scheduledNotifications = DependencyService.Get<INotificationService>().GetScheduledNotifications();
+			//var i = 1;
+			//foreach (var n in scheduledNotifications)
+			//{
+			//	Debug.WriteLine($"{i++}");
+			//	Debug.WriteLine($"{n.Title}");
+			//	Debug.WriteLine($"{n.Content}");
+			//	Debug.WriteLine($"{n.FireDate.ToString("s")}");
+			//	Debug.WriteLine("------\n");
+			//}
 		}
 
 		protected override void OnStart()
