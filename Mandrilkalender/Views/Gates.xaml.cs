@@ -67,7 +67,7 @@ namespace Mandrilkalender
 
 		async void Popup_OnPlay(Mandrilkalender.Gate g, EventArgs e)
 		{
-			Device.OpenUri(new Uri($"vnd.youtube://{g.VideoId}"));
+			Device.OpenUri(new Uri($"https://www.youtube.com/watch?v={g.VideoId}"));
 			//await Navigation.PushModalAsync(new VideoPage(g), true);
 		}
 
