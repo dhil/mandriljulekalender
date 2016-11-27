@@ -129,6 +129,8 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="NotificationServiceImpl.cs" />
     <Compile Include="BootCompletedBroadcastMessageReceiver.cs" />
+    <Compile Include="AlarmReceiver.cs" />
+    <Compile Include="SoundServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
