@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Content;
+using Android.Util;
 using Android.Widget;
 
 namespace Mandrilkalender.Droid
@@ -13,12 +14,9 @@ namespace Mandrilkalender.Droid
 		{
 			if (intent.Action == Intent.ActionBootCompleted)
 			{
-				Toast.MakeText
-				(
-					context,
-					"The BootCompletedExample application catches the BootCompleted broadcast message",
-					ToastLength.Long
-				).Show();
+				Log.Debug("Mandril", "Boot receiver hit! MANDRIL!!");
+
+				NotificationHelper.ScheduleNotifications();
 			}
 		}
 	}

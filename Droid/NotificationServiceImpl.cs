@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using Android.App;
 using Android.Content;
+using Android.OS;
 using Android.Support.V7.App;
+using Android.Util;
+using Java.Text;
+using Java.Util;
 using Mandrilkalender.Droid;
 using Xamarin.Forms;
 
@@ -11,45 +15,23 @@ namespace Mandrilkalender.Droid
 {
 	public class NotificationServiceImpl : INotificationService
 	{
-		public List<MandrilNotification> GetScheduledNotifications()
+		public void ScheduleNotification(DateTime dateTime)
 		{
-			throw new NotImplementedException();
-		}
+			Intent alarmIntent = new Intent(Forms.Context, typeof(AlarmReceiver));
+			alarmIntent.PutExtra("title", $"Glædelig {dateTime.Day}. december");
+			alarmIntent.PutExtra("message", $"Hvad mon venter bag låge nummer {dateTime.Day}?");
+			alarmIntent.PutExtra("id", dateTime.Day);
 
-		public bool IsNotificationScheduled(DateTime date)
-		{
-			throw new NotImplementedException();
-		}
+			PendingIntent pendingIntent = PendingIntent.GetBroadcast(Forms.Context, dateTime.Day, alarmIntent, PendingIntentFlags.UpdateCurrent);
+			AlarmManager alarmManager = (AlarmManager)Forms.Context.GetSystemService(Context.AlarmService);
 
-		public void ScheduleNotification(string title, string content, DateTime time)
-		{
-			var notification = CreateNotification(title, content);
-		}
+			// Convert DateTime to Java Calendar object
+			var cal = Calendar.Instance;
+			cal.Set(dateTime.Year, dateTime.Month-1, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
 
-		private Notification CreateNotification(string title, string content)
-		{
-			// Set up an intent so that tapping the notifications returns to this app:
-			Intent intent = new Intent(Forms.Context, typeof(MainActivity));
+			alarmManager.Set(AlarmType.Rtc, cal.TimeInMillis, pendingIntent);
 
-			// Create a PendingIntent; we're only using one PendingIntent (ID = 0):
-			const int pendingIntentId = 0;
-			PendingIntent pendingIntent =
-				PendingIntent.GetActivity(Forms.Context, pendingIntentId, intent, PendingIntentFlags.OneShot);
-
-
-			Notification.Builder builder = new Notification.Builder(Forms.Context)
-				.SetContentIntent(pendingIntent)
-				.SetSmallIcon(Resource.Drawable.icon)
-				.SetContentTitle(title)
-				.SetContentText(content)
-				.SetDefaults(NotificationDefaults.Sound | NotificationDefaults.Vibrate)
-				.SetSound(Android.Net.Uri.Parse($"android.resource://{Forms.Context.ApplicationContext.PackageName}/raw/intro"));
-			
-
-			// Build the notification:
-			Notification notification = builder.Build();
-
-			return notification;
+			Log.Debug("MANDRILTIME", $"Alarm scheduled at {SimpleDateFormat.Instance.Format(cal.Time)}");
 		}
 	}
 }
