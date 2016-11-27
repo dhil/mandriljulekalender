@@ -161,12 +161,16 @@ namespace Mandrilkalender
             get { return (RotationDirection)this.GetValue(RotationDirectionProperty); }
             set { this.SetValue(RotationDirectionProperty, value); }
         }
-        /// <summary>
-        /// Creates a new instance of <c>ViewFlipper</c>
-        /// </summary>
-        public ViewFlipper()
+
+		private Func<bool> RequestFlip;
+
+		/// <summary>
+		/// Creates a new instance of <c>ViewFlipper</c>
+		/// </summary>
+		public ViewFlipper(Func<bool> requestFlip)
         {
-            this.GestureRecognizers.Add(
+			this.RequestFlip = requestFlip;
+			this.GestureRecognizers.Add(
                 new TapGestureRecognizer 
                 {
                     Command = new Command(this.OnTapped)
@@ -240,6 +244,10 @@ namespace Mandrilkalender
         /// </summary>
         private void OnTapped()
         {
+			if (!RequestFlip())
+			{
+				return;
+			}
 			if (this.FlipOnTap)
 			{
 				this.FlipState = this.FlipState == FlipState.Front ?

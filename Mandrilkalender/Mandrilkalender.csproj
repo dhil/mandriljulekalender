@@ -54,6 +54,7 @@
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Services\ISoundService.cs" />
+    <Compile Include="Services\IToastService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

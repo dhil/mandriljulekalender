@@ -38,7 +38,7 @@ namespace Mandrilkalender
 				Aspect = Aspect.AspectFill
 			};
 
-			flipper = new ViewFlipper()
+			flipper = new ViewFlipper(RequestFlip)
 			{
 				FrontView = frontView,
 				BackView = backView,
@@ -70,6 +70,11 @@ namespace Mandrilkalender
 			{
 				Command = new Command((obj) =>
 				{
+					if (!RequestFlip())
+					{
+						return;
+					}
+
 					if (flipper.FlipState == FlipState.Front)
 					{
 						flipper.FlipState = FlipState.Back;
@@ -85,10 +90,21 @@ namespace Mandrilkalender
 
 		}
 
+		public bool RequestFlip()
+		{
+			var now = DateTime.Now.Date;
+			if (now.Month == 12 && now.Day >= gate.Number)
+			{
+				return true;
+			}
+
+			DependencyService.Get<IToastService>().ShowToast($"Vitter Rynkemås mener ikke det er den {gate.Number}. december endnu!", 3000);
+
+			return false;
+		}
+
 		private void OnTapped()
 		{
-			// TODO: Indsæt tjek for om den pågældende låge må åbnes på denne dag.
-
 			App.GateService.OpenGate(this.gate);
 
 			flipper.FlipOnTap = false;

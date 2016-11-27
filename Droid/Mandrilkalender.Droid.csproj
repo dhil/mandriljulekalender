@@ -131,6 +131,7 @@
     <Compile Include="BootCompletedBroadcastMessageReceiver.cs" />
     <Compile Include="AlarmReceiver.cs" />
     <Compile Include="SoundServiceImpl.cs" />
+    <Compile Include="ToastServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

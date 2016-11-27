@@ -127,6 +127,9 @@
     <Reference Include="Realm">
       <HintPath>..\packages\Realm.0.80.0\lib\Xamarin.iOS10\Realm.dll</HintPath>
     </Reference>
+    <Reference Include="ToastIOS">
+      <HintPath>..\Components\ToastIOS-1.6\lib\ios-unified\ToastIOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mandrilkalender\Mandrilkalender.csproj">
@@ -162,6 +165,7 @@
     <Compile Include="NotificationServiceImpl.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="SoundServiceImpl.cs" />
+    <Compile Include="ToastServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\a.png" />
@@ -252,6 +256,12 @@
     <BundleResource Include="Resources\icon%402x.png" />
     <BundleResource Include="Resources\icon%403x.png" />
     <BundleResource Include="Resources\intro.caf" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="ToastIOS">
+      <Version>1.6</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.2.127\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
