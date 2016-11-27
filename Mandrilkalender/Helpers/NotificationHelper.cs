@@ -5,23 +5,25 @@ namespace Mandrilkalender
 {
 	public static class NotificationHelper
 	{
-		public static DateTime FROM = new DateTime(DateTime.Now.Year, 11, 1);
-		public static DateTime THROUGH = new DateTime(DateTime.Now.Year, 11, 30);
-		public static TimeSpan TRIGGER_TIME = new TimeSpan(15, 30, 0);
+		private static int MONTH = 12;
+
+		public static DateTime FROM = new DateTime(DateTime.Now.Year, MONTH, 1);
+		public static DateTime THROUGH = new DateTime(DateTime.Now.Year, MONTH, 25);
+		public static TimeSpan TRIGGER_TIME = new TimeSpan(8, 0, 0);
 
 		public static void ScheduleNotifications()
 		{
 			var from = FROM;
 			var now = DateTime.Now;
 
-			if (now.Month == 11)
+			if (now.Month == MONTH)
 			{
 				from = now.Date;
 			}
 
 			while (from.Date <= THROUGH.Date)
 			{
-				if (now.TimeOfDay <= TRIGGER_TIME)
+				if (now.Date < from.Date || (now.Date == from.Date && now.TimeOfDay <= TRIGGER_TIME))
 				{
 					var date = from.Date + TRIGGER_TIME;
 
