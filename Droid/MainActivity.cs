@@ -38,10 +38,6 @@ namespace Mandrilkalender.Droid
 			StatusBarHelper.DecorView = this.Window.DecorView;
 
 			LoadApplication(new App());
-
-			// load light theme
-			var x = typeof(Xamarin.Forms.Themes.LightThemeResources);
-			x = typeof(Xamarin.Forms.Themes.Android.UnderlineEffect);
 		}
 
 		public override void OnAttachedToWindow()

@@ -28,10 +28,6 @@ namespace Mandrilkalender.iOS
 
 			LoadApplication(new App());
 
-			// Load themes
-			var x = typeof(Xamarin.Forms.Themes.LightThemeResources);
-			x = typeof(Xamarin.Forms.Themes.iOS.UnderlineEffect);
-
 			// Ask the user to grant us permissions to display notifications
 			if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
 			{

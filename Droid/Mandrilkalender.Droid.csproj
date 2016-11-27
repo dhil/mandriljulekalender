@@ -26,6 +26,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidSigningKeyStore>/Users/frmi/Dropbox/Frederik/AndroidKeyStore/keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>Fbm200290</AndroidSigningStorePass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +38,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidKeyStore></AndroidKeyStore>
+    <AndroidSigningKeyStore>/Users/frmi/Dropbox/Frederik/AndroidKeyStore/keystore.jks</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>Fbm200290</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>mandrilkalender</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>Fbm200290</AndroidSigningKeyPass>
+    <AndroidSupportedAbis>armeabi-v7a;x86;armeabi;arm64-v8a;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,15 +91,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Theme.Android">
-      <HintPath>..\packages\Xamarin.Forms.Theme.Base.1.0.0.43-pre1\lib\MonoAndroid10\Xamarin.Forms.Theme.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Theme.Base">
-      <HintPath>..\packages\Xamarin.Forms.Theme.Base.1.0.0.43-pre1\lib\MonoAndroid10\Xamarin.Forms.Theme.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Theme.Light">
-      <HintPath>..\packages\Xamarin.Forms.Theme.Light.1.0.0.43-pre1\lib\MonoAndroid10\Xamarin.Forms.Theme.Light.dll</HintPath>
     </Reference>
     <Reference Include="FormsViewGroup">
       <HintPath>..\packages\Xamarin.Forms.2.3.3.166-pre4\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
