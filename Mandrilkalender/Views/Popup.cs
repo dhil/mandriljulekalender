@@ -44,9 +44,7 @@ namespace Mandrilkalender
 			var descriptionText = new Label
 			{
 				Text = gate.Description,
-				LineBreakMode = LineBreakMode.WordWrap,
 				HorizontalOptions = LayoutOptions.Fill,
-				//StyleClass = new List<string>() { "Body" }
 			};
 
 			var playBtn = new Button
@@ -65,20 +63,19 @@ namespace Mandrilkalender
 
 			var layout = new Grid
 			{
-				Padding = new Thickness(10, 10, 10, 10)
+				Padding = new Thickness(10, 10, 10, 10),
+				VerticalOptions = LayoutOptions.CenterAndExpand,
+				HorizontalOptions = LayoutOptions.CenterAndExpand
 			};
 			layout.RowDefinitions = new RowDefinitionCollection();
 			layout.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-			layout.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Star) });
-			layout.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Star) });
+			layout.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+			layout.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
 			layout.ColumnDefinitions = new ColumnDefinitionCollection();
 			layout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 			layout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 			layout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 			layout.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-
-			AbsoluteLayout.SetLayoutBounds(layout, new Rectangle(0.5, 0.5, 0.8, 0.3));
-			AbsoluteLayout.SetLayoutFlags(layout, AbsoluteLayoutFlags.All);
 
 			if (Device.OS != TargetPlatform.Android)
 			{
@@ -110,6 +107,14 @@ namespace Mandrilkalender
 			layout.Children.Add(descriptionText, 1, 1);
 			Grid.SetColumnSpan(descriptionText, 3);
 
+			var wrapper = new Grid()
+			{
+				HorizontalOptions = LayoutOptions.Center,
+				VerticalOptions = LayoutOptions.Center,
+			};
+			wrapper.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+			wrapper.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+
 			var background = new RoundedBoxView
 			{
 				BackgroundColor = Color.FromHex("#F5F5F5"),
@@ -117,11 +122,15 @@ namespace Mandrilkalender
 				HorizontalOptions = LayoutOptions.Fill,
 				VerticalOptions = LayoutOptions.Fill,
 			};
-			AbsoluteLayout.SetLayoutBounds(background, new Rectangle(0.5, 0.5, 0.8, 0.3));
-			AbsoluteLayout.SetLayoutFlags(background, AbsoluteLayoutFlags.All);
+			wrapper.Children.Add(background, 0, 0);
 
-			Children.Add(background);
-			Children.Add(layout);
+			wrapper.Children.Add(layout, 0, 0);
+
+			var contentView = new ContentView()
+			{
+				Content = wrapper
+			};
+			Children.Add(contentView, new Rectangle(0, 0, 1, 1), AbsoluteLayoutFlags.All);
 
 			// Gesture recognizers.
 			// Ensure that taps within the actual box does not hide the popup
