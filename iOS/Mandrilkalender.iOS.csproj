@@ -161,6 +161,7 @@
     <Compile Include="VideoPlayerRenderer.cs" />
     <Compile Include="NotificationServiceImpl.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
+    <Compile Include="SoundServiceImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\a.png" />

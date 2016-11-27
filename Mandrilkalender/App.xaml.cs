@@ -19,12 +19,12 @@ namespace Mandrilkalender
 			MainPage = new Gates();
 
 			NotificationHelper.ScheduleNotifications();
-
 		}
 
 		protected override void OnStart()
 		{
 			// Handle when your app starts
+			DependencyService.Get<ISoundService>().PlayIntro();
 		}
 
 		protected override void OnSleep()

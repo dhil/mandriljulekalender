@@ -53,6 +53,7 @@
     <Compile Include="Controls\MandrilContentView.cs" />
     <Compile Include="Services\INotificationService.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
+    <Compile Include="Services\ISoundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -88,6 +89,7 @@
     <Reference Include="Xamarin.Forms.Theme.Light">
       <HintPath>..\packages\Xamarin.Forms.Theme.Light.1.0.0.43-pre1\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Theme.Light.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
