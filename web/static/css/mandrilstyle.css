@@ -1,0 +1,428 @@
+/*
+ * Stylesheet for mandrilkalenderen
+ */
+body {
+    background: url(../images/julemandril-1.png) no-repeat center #005eee;
+    min-height: 100vh;
+}
+
+@media only screen and (max-width:800px) {
+    body {
+        background-image: url(../images/julemandril-1small.png);
+    }
+}
+
+.calendar-frame {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 95vh;
+}
+
+.calendar-grid {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    max-width: 990px;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-areas:    "d1     d2      d3      d4      d5"
+                            "d6     d7      d8      d9      d10"
+                            "d11    d12     d13     d14     d15"
+                            "d16    d17     d18     d19     d20"
+                            "d21    d22     d23     d24     d25";
+
+    margin-top: 25px;
+    /* border: 2px dashed red; */
+}
+
+@media only screen and (max-width:900) and (max-height:400px) {
+    .calendar-grid {
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-areas:    "d1     d2      d3      d4      d5      d6   d7  d22"
+                                "d8     d9      d10     d11     d12     d13  d14 d23"
+                                "d15    d16     d17     d18     d19     d20  d21 d24    d25";
+    }
+}
+
+.calendar-grid input {
+    display: none;
+}
+
+/* door assignment */
+#door-1 {
+    grid-area: d1;
+}
+#door-2 {
+    grid-area: d2;
+}
+#door-3 {
+    grid-area: d3;
+}
+#door-4 {
+    grid-area: d4;
+}
+#door-5 {
+    grid-area: d5;
+}
+#door-6 {
+    grid-area: d6;
+}
+#door-7 {
+    grid-area: d7;
+}
+#door-8 {
+    grid-area: d8;
+}
+#door-9 {
+    grid-area: d9;
+}
+#door-10 {
+    grid-area: d10;
+}
+#door-11 {
+    grid-area: d11;
+}
+#door-12 {
+    grid-area: d12;
+}
+#door-13 {
+    grid-area: d13;
+}
+#door-14 {
+    grid-area: d14;
+}
+#door-15 {
+    grid-area: d15;
+}
+#door-16 {
+    grid-area: d16;
+}
+#door-17 {
+    grid-area: d17;
+}
+#door-18 {
+    grid-area: d18;
+}
+#door-19 {
+    grid-area: d19;
+}
+#door-20 {
+    grid-area: d20;
+}
+#door-21 {
+    grid-area: d21;
+}
+#door-22 {
+    grid-area: d22;
+}
+#door-23 {
+    grid-area: d23;
+}
+#door-24 {
+    grid-area: d24;
+}
+#door-25 {
+    grid-area: d25;
+}
+
+.door-1 .back {
+    background: url(../images/1.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-2 .back {
+    background: url(../images/2.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-3 .back {
+    background: url(../images/3.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-4 .back {
+    background: url(../images/4.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-5 .back {
+    background: url(../images/5.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-6 .back {
+    background: url(../images/6.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-7 .back {
+    background: url(../images/7.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-8 .back {
+    background: url(../images/8.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-9 .back {
+    background: url(../images/9.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-10 .back {
+    background: url(../images/10.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-11 .back {
+    background: url(../images/11.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-12 .back {
+    background: url(../images/12.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-13 .back {
+    background: url(../images/13.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-14 .back {
+    background: url(../images/14.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-15 .back {
+    background: url(../images/15.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-16 .back {
+    background: url(../images/16.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-17 .back {
+    background: url(../images/17.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-18 .back {
+    background: url(../images/18.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-19 .back {
+    background: url(../images/19.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-20 .back {
+    background: url(../images/20.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-21 .back {
+    background: url(../images/21.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-22 .back {
+    background: url(../images/22.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-23 .back {
+    background: url(../images/23.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-24 .back {
+    background: url(../images/24.png) no-repeat center #005eee;
+    background-size: cover;
+}
+.door-25 .back {
+    background: url(../images/25.png) no-repeat center #005eee;
+    background-size: cover;
+}
+
+label {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    height: 120px;
+    max-width: 182px;
+    max-height: 137px;
+    /* mix-blend-mode: difference; */
+    /* filter: invert(1) grayscale(1) contrast(9); */
+}
+
+.door {
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: all 300ms;
+    border: 3px dashed transparent;
+    color: #fff;
+    font-family: 'Kalam', cursive;
+    font-size: 2em;
+    font-weight: bold;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
+}
+
+.door div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.door .back {
+    background-color: #2e313d;
+    transform: rotateY(180deg);
+}
+
+label:hover .door {
+    border-color: #ccc;
+}
+
+:checked + .door {
+    transform: rotateY(180deg);
+}
+
+/* Container for the snackbar */
+.snackbar-container {
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* The actual snackbar style */
+#snackbar {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    z-index: 1;
+    width: 100wh;
+}
+
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 10; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 0; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {top: 0; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {top: 0; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
+
+/* video player modal */
+.modal {
+    display: none;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 90%;
+    height: 90vh;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/* Modal Content/Box */
+/* .modal-content { */
+/*     background-color: #fefefe; */
+/*     margin: 15% auto; /\* 15% from the top and centered *\/ */
+/*     padding: 20px; */
+/*     border: 1px solid #888; */
+/*     min-width: 600px; */
+/* } */
+
+/* The Close Button */
+.close {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #aaa;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #005eee;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fill-remaining-space {
+  flex: auto;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+    display: block;
+    text-align: center;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: none;
+    width: 100%;
+    height: 100%;
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19); */
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.embedded-player {
+    width: 90%;
+    min-height: 77vh;
+    display: inline-block;
+}
+
+.dialogIsOpen #page-wrap {
+
+  /* Blur and de-color */
+  -webkit-filter: blur(5px) grayscale(50%);
+}
