@@ -58,6 +58,12 @@ const Snackbar = (function() {
 
 // Calendar data model
 const Calendar = (function() {
+    /*
+     * The calendar state is encoded as an array of natural numbers
+     * (layout) and a bit vector (states). The layout array maps grid
+     * positions to actual door numbers, whilst the states bit vector
+     * encodes whether the nth grid cell has been opened.
+     */
     const make = function(layout, states) {
         if (layout == null) {
             layout = [...Array(25).keys()].map((i) => i + 1);
@@ -90,6 +96,8 @@ const Calendar = (function() {
 
     // Serialisation and deserialisation
     const serialise = function(calendar) {
+        // The layout array is encoded as a string, where each single
+        // digit number is prefixed with a zero.
         let layoutEncoded = calendar.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
         let stateEncoded = layoutEncoded + "," + calendar.states;
         return stateEncoded;
@@ -189,7 +197,7 @@ const Door = (function() {
                 Calendar.persist($stateName, $calendar);
                 return {'tag': OPEN};
             } else {
-                return {'tag': TOO_EARLY };
+                return {'tag': TOO_EARLY};
             }
         }
         return;
