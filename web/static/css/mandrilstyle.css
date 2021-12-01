@@ -17,7 +17,6 @@ body {
     justify-content: center;
     text-align: center;
     width: 99%;
-    border: 2px solid red;
 }
 
 @media only screen and (min-height:1024px) {
