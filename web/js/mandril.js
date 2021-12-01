@@ -47,7 +47,7 @@ const Snackbar = (function() {
         let snackbar = document.getElementById("snackbar");
         snackbar.innerHTML = msg;
         snackbar.className = "show";
-        // After 3 seconds, remove the show class from DIV
+        // After `seconds` hide the snackbar
         setTimeout(function() {
             snackbar.className = snackbar.className.replace("show", "");
         }, seconds * 1000);
@@ -83,6 +83,10 @@ const Calendar = (function() {
         return (calendar.states & (1 << doorN)) != 0;
     };
 
+    const allClosed = function(calendar) {
+        return calendar.states === 0;
+    }
+
     const open = function(calendar, doorN) {
         if (calendar.locked) return;
 
@@ -116,7 +120,7 @@ const Calendar = (function() {
     };
 
     return {  'make': make
-            , 'isOpen': isOpen, 'open': open, 'doorAt': doorAt
+            , 'isOpen': isOpen, 'allClosed': allClosed, 'open': open, 'doorAt': doorAt
             , 'serialise': serialise, 'deserialise': deserialise, 'persist': persist };
 })();
 
@@ -182,7 +186,9 @@ const Door = (function() {
         // Some rules:
         // 1) A door that has been opened cannot be closed again.
         // 2) A door can only be opened if its number/label is less
-        // than or equal to the current day in December.
+        // than or equal to the current day in December...
+        // Moreover, if it is January and at least one door is open,
+        // then you may open all other doors.
         let doorNumber = Calendar.doorAt($calendar, gridPosition);
         if (Calendar.isOpen($calendar, gridPosition)) {
             return { 'tag': ALREADY_OPEN
@@ -191,8 +197,8 @@ const Door = (function() {
                    , 'videoId': videoIds[doorNumber - 1]}
         } else {
             let currentDate = new Date().getTime();
-            let doorDate = new Date().setMonth(11, doorNumber);
-            if (doorDate <= currentDate) {
+            let doorDate = new Date(new Date().getFullYear(), 11, doorNumber);
+            if (doorDate <= currentDate || (!Calendar.allClosed($calendar) && new Date().getMonth() === 0)) {
                 Calendar.open($calendar, gridPosition);
                 Calendar.persist($stateName, $calendar);
                 return {'tag': OPEN};
