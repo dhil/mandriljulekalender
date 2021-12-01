@@ -2,6 +2,11 @@
  * Dynamic calendar rendering
  */
 
+// Globals to maintain calendar state
+let $calendar = null;
+const $stateName = "calendarState";
+
+// Manipulation of cookies
 const Cookie = (function() {
     const get = function(name) {
         // Split into key-value pairs
@@ -29,65 +34,85 @@ const Cookie = (function() {
     };
 
     const forget = function(key) {
-        document.cookie = key + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+        document.cookie = key + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;SameSite=lax;path=/";
         return;
     }
 
     return {'get': get, 'set': set, 'has': has, 'forget': forget};
 })();
 
-class Calendar {
-    constructor(doorLayout, doorStates) {
-        this.layout = doorLayout;
-        this.states = doorStates;
-    }
+// Snackbar interaction
+const Snackbar = (function() {
+    const notify = function(msg, seconds = 3) {
+        let snackbar = document.getElementById("snackbar");
+        snackbar.innerHTML = msg;
+        snackbar.className = "show";
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function() {
+            snackbar.className = snackbar.className.replace("show", "");
+        }, seconds * 1000);
+        return;
+    };
+    return {'notify': notify};
+})();
 
-    // Logic
-    open(doorN) { // zero-indexed
-        this.states |= (1 << doorN);
-        return this;
-    }
-
-    isOpen(doorN) {
-        return (this.states & (1 << doorN)) != 0;
-    }
-
-    isClosed(doorN) { return !isOpen(doorN); }
-
-    // Decoding and encoding
-    static deserialise(s) {
-        let [doorLayout, doorStates] = s.split(',');
-        doorLayout = doorLayout.match(/.{1,2}/g);
-        return new Calendar(doorLayout.map((door) => door | 0), doorStates | 0);
-    }
-
-    serialise() {
-        let layoutEncoded = this.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
-        let stateEncoded = layoutEncoded + "," + this.states;
-        return stateEncoded;
-    }
-
-    static makeNew() {
-        let layout = [...Array(25).keys()].map((i) => i + 1);
-        // Shuffle layout
-        for (let i = layout.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [layout[i], layout[j]] = [layout[j], layout[i]];
+// Calendar data model
+const Calendar = (function() {
+    const make = function(layout, states) {
+        if (layout == null) {
+            layout = [...Array(25).keys()].map((i) => i + 1);
+            // Shuffle layout
+            for (let i = layout.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [layout[i], layout[j]] = [layout[j], layout[i]];
+            }
         }
-        return new Calendar(layout, 0);
+
+        if (states == null) states = 0;
+
+        return {'layout': layout, 'states': states};
+    };
+
+    const isOpen = function(calendar, doorN) {
+        return (calendar.states & (1 << doorN)) != 0;
+    };
+
+    const open = function(calendar, doorN) {
+        if (calendar.locked) return;
+
+        calendar.states |= (1 << doorN);
+        return;
     }
-}
 
-let $calendar = null;
-const $stateName = "calendarState";
-let $locked = false;
+    const doorAt = function(calendar, position) {
+        return calendar.layout[position];
+    };
 
-function persist() {
-    const expirationDate = new Date((new Date().getFullYear() + 1) + "-01-31");
-    Cookie.set($stateName, $calendar.serialise(), expirationDate);
-    return;
-}
+    // Serialisation and deserialisation
+    const serialise = function(calendar) {
+        let layoutEncoded = calendar.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
+        let stateEncoded = layoutEncoded + "," + calendar.states;
+        return stateEncoded;
+    };
 
+    const deserialise = function(serialised) {
+        let [doorLayout, doorStates] = serialised.split(',');
+        doorLayout = doorLayout.match(/.{1,2}/g);
+        return make(doorLayout.map((door) => door | 0), doorStates | 0);
+    };
+
+    const persist = function(key, calendar) {
+        const expirationDate = new Date((new Date().getFullYear() + 1) + "-01-31");
+        Cookie.set(key, serialise(calendar), expirationDate);
+        return;
+    };
+
+    return {  'make': make
+            , 'isOpen': isOpen, 'open': open, 'doorAt': doorAt
+            , 'serialise': serialise, 'deserialise': deserialise, 'persist': persist };
+})();
+
+// Door data model
 const Door = (function() {
     const descriptions = [ "Casper får besøg af Asger Debono, som lægger lækkerier ud på foderbrættet.",
 			   "Casper får besøg af Jørgen Ingemann, der får besøg af Julemanden som den første hvert år.",
@@ -140,44 +165,9 @@ const Door = (function() {
 		       "8kMTRDXxBVM",
 		       "OH_c3VR3O6M" ];
 
-    function toast() {
-        let snackbar = document.getElementById("snackbar");
-        snackbar.className = "show";
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function() {
-            snackbar.className = snackbar.className.replace("show", "");
-        }, 3000);
-        return;
-    }
+    const OPEN = 0, ALREADY_OPEN = 1, TOO_EARLY = 2;
 
-    function displayVideoPlayer(episode, description, videoId) {
-        //
-        document.body.classList.add("dialogIsOpen");
-        // Get the modal
-        var modal = document.getElementById("videoplayer");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        //
-        let body = document.getElementsByClassName("modal-body")[0];
-        body.innerHTML = "<p>" + description + "</p><iframe class=\"embedded-player\" src=\"https://www.youtube.com/embed/" + videoId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
-        document.getElementById("video-title").innerHTML = "Afsnit " + episode;
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-            body.innerHTML = "";
-            document.body.className = document.body.className.replace("dialogIsOpen","");
-            $locked = false;
-        }
-        modal.style.display = "block";
-    }
-
-    const open = function(d, n) {
-        d.checked = $calendar.isOpen(n);
-        if ($locked) return;
-        let doorNumber = $calendar.layout[n];
+    const open = function(gridPosition) {
         // Doors are coded as checkboxes, where we interpret "checked"
         // as denoting the door as "open", otherwise it is
         // "closed".
@@ -185,30 +175,30 @@ const Door = (function() {
         // 1) A door that has been opened cannot be closed again.
         // 2) A door can only be opened if its number/label is less
         // than or equal to the current day in December.
-        if (d.checked) {
-            // Open video modal
-            $locked = true;
-            displayVideoPlayer(doorNumber, descriptions[doorNumber - 1], videoIds[doorNumber - 1]);
+        let doorNumber = Calendar.doorAt($calendar, gridPosition);
+        if (Calendar.isOpen($calendar, gridPosition)) {
+            return { 'tag': ALREADY_OPEN
+                   , 'episode': doorNumber
+                   , 'episodeDescription': descriptions[doorNumber - 1]
+                   , 'videoId': videoIds[doorNumber - 1]}
         } else {
             let currentDate = new Date();
             let doorDate = new Date(currentDate.getFullYear() + "-12-" + doorNumber);
             if (doorDate <= currentDate) {
-                d.checked = true;
-                $calendar.open(n);
-                persist();
+                Calendar.open($calendar, gridPosition);
+                Calendar.persist($stateName, $calendar);
+                return {'tag': OPEN};
             } else {
-                d.checked = false;
-                // Show notification
-                toast();
+                return {'tag': TOO_EARLY };
             }
         }
         return;
     };
 
-    const make = function(i, n, isOpen) {
+    const make = function(gridPosition, doorNumber, isOpen) {
         let front = document.createElement("div");
         front.classList.add("front");
-        front.appendChild(document.createTextNode(n.toString()));
+        front.appendChild(document.createTextNode(doorNumber.toString()));
         let rear = document.createElement("div");
         rear.classList.add("back");
 
@@ -219,28 +209,29 @@ const Door = (function() {
         let input = document.createElement("input");
         input.setAttribute("type", "checkbox");
         input.checked = isOpen;
-        input.onclick = function(_event) { return Door.open(input, i); };
+        input.onclick = function(_event) { return Page.openDoor(input, gridPosition); };
 
         let label = document.createElement("label");
         label.appendChild(input); label.appendChild(door);
 
         let doorN = document.createElement("div");
-        let j = i + 1;
-        doorN.setAttribute("id", "door-" + j);
-        doorN.classList.add("door-" + n);
+        let doorId = gridPosition + 1;
+        doorN.setAttribute("id", "door-" + doorId);
+        doorN.classList.add("door-" + doorNumber);
         doorN.appendChild(label);
         return doorN;
     };
 
-    return {'open': open, 'make': make};
+    return {  'open': open, 'make': make
+            , 'Response': {'OPEN': OPEN, 'ALREADY_OPEN': ALREADY_OPEN, 'TOO_EARLY': TOO_EARLY} };
 })();
 
-
+// Page view & controller
 const Page = (function() {
     const render = function() {
         let doors = document.createDocumentFragment();
         for (let i = 0; i < 25; i++) {
-            doors.appendChild(Door.make(i, $calendar.layout[i], $calendar.isOpen(i)));
+            doors.appendChild(Door.make(i, Calendar.doorAt($calendar, i), Calendar.isOpen($calendar, i)));
         }
         let calendarNode = document.getElementById("calendar");
         calendarNode.innerHTML = "";
@@ -252,8 +243,8 @@ const Page = (function() {
         if (Cookie.has($stateName)) {
             $calendar = Calendar.deserialise(Cookie.get($stateName));
         } else {
-            $calendar = Calendar.makeNew();
-            persist();
+            $calendar = Calendar.make();
+            Calendar.persist($stateName, $calendar);
         }
         return render();
     };
@@ -262,5 +253,57 @@ const Page = (function() {
         Cookie.forget($stateName);
         return location.reload();
     };
-    return {'initialise': initialise, 'reset': reset};
+
+    let locked = false;
+    const freeze = function() { locked = true; return; };
+    const unfreeze = function() { locked = false; return };
+
+    function showVideoPlayer(episode, description, videoId) {
+        // Freeze and blur background
+        freeze();
+        document.body.classList.add("dialogIsOpen");
+
+        // Get the modal
+        let modal = document.getElementById("videoplayer");
+
+        // Get the <span> element that closes the modal
+        let span = document.getElementsByClassName("close")[0];
+
+        // Add episode description along with an embedded YouTube video frame to the modal body
+        let body = document.getElementsByClassName("modal-body")[0];
+        body.innerHTML = "<p>" + description + "</p><iframe class=\"embedded-player\" src=\"https://www.youtube.com/embed/" + videoId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+        document.getElementById("video-title").innerHTML = "Afsnit " + episode;
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+            body.innerHTML = "";
+            document.body.className = document.body.className.replace("dialogIsOpen","");
+            unfreeze();
+        }
+        modal.style.display = "block";
+    }
+
+    const openDoor = function(cell, position) {
+        cell.checked = Calendar.isOpen($calendar, position); // inhibit the event
+        if (locked) return;
+        let response = Door.open(position);
+        switch (response.tag) {
+        case Door.Response.OPEN:
+            cell.checked = true;
+            break;
+        case Door.Response.ALREADY_OPEN:
+            // Show video modal
+            showVideoPlayer(response.episode, response.episodeDescription, response.videoId);
+            break;
+        case Door.Response.TOO_EARLY:
+            // Display notification
+            Snackbar.notify("Hov, hov pilfinger. Denne låge må ikke åbnes endnu!", 3);
+            break;
+        default:
+            throw "Unrecognised door response";
+        }
+        return;
+    };
+    return {'initialise': initialise, 'reset': reset, 'openDoor': openDoor};
 })();
