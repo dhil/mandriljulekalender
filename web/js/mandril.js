@@ -182,10 +182,10 @@ const Door = (function() {
                    , 'episodeDescription': descriptions[doorNumber - 1]
                    , 'videoId': videoIds[doorNumber - 1]}
         } else {
-            let currentDate = new Date();
-            let doorDate = new Date(currentDate.getFullYear() + "-12-" + doorNumber);
-            if (doorDate <= currentDate) {
-                Calendar.open($calendar, gridPosition);
+            let currentDate = new Date().getTime();
+            let doorDate = new Date().setMonth(11, doorNumber);
+			if (doorDate <= currentDate) {
+				Calendar.open($calendar, gridPosition);
                 Calendar.persist($stateName, $calendar);
                 return {'tag': OPEN};
             } else {

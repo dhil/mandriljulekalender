@@ -278,6 +278,7 @@ label {
     position: absolute;
     height: 100%;
     width: 100%;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
     display: flex;
