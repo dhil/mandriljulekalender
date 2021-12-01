@@ -188,7 +188,7 @@ const Door = (function() {
         if (d.checked) {
             // Open video modal
             $locked = true;
-            displayVideoPlayer(actualDoor, descriptions[doorNumber - 1], videoIds[doorNumber - 1]);
+            displayVideoPlayer(doorNumber, descriptions[doorNumber - 1], videoIds[doorNumber - 1]);
         } else {
             let currentDate = new Date();
             let doorDate = new Date(currentDate.getFullYear() + "-12-" + doorNumber);
