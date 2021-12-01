@@ -192,8 +192,8 @@ const Door = (function() {
         } else {
             let currentDate = new Date().getTime();
             let doorDate = new Date().setMonth(11, doorNumber);
-			if (doorDate <= currentDate) {
-				Calendar.open($calendar, gridPosition);
+            if (doorDate <= currentDate) {
+                Calendar.open($calendar, gridPosition);
                 Calendar.persist($stateName, $calendar);
                 return {'tag': OPEN};
             } else {
