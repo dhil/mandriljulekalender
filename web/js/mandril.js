@@ -177,7 +177,7 @@ const Door = (function() {
     const open = function(d, n) {
         d.checked = $calendar.isOpen(n);
         if ($locked) return;
-        let doorNumber = n + 1;
+        let doorNumber = $calendar.layout[n];
         // Doors are coded as checkboxes, where we interpret "checked"
         // as denoting the door as "open", otherwise it is
         // "closed".
@@ -188,8 +188,7 @@ const Door = (function() {
         if (d.checked) {
             // Open video modal
             $locked = true;
-            let actualDoor = $calendar.layout[n];
-            displayVideoPlayer(actualDoor, descriptions[actualDoor - 1], videoIds[actualDoor - 1]);
+            displayVideoPlayer(actualDoor, descriptions[doorNumber - 1], videoIds[doorNumber - 1]);
         } else {
             let currentDate = new Date();
             let doorDate = new Date(currentDate.getFullYear() + "-12-" + doorNumber);
@@ -220,7 +219,7 @@ const Door = (function() {
         let input = document.createElement("input");
         input.setAttribute("type", "checkbox");
         input.checked = isOpen;
-        input.onclick = function(_event) { return Door.open(input, i) };
+        input.onclick = function(_event) { return Door.open(input, i); };
 
         let label = document.createElement("label");
         label.appendChild(input); label.appendChild(door);
