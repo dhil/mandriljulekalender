@@ -22,7 +22,7 @@ Jørgensen er ikke involveret i dette projekt.
 
 ## Bidragydere
 
-Applikationen er udviklet af
+Applikationen er udviklet med bidrag fra
 
 * Daniel Hillerström
 * Frederik Mikkelsen
