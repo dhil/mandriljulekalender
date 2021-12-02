@@ -22,6 +22,8 @@ Jørgensen er ikke involveret i dette projekt.
 
 ## Bidragydere
 
+Applikationen er udviklet af
+
 * Daniel Hillerström
 * Frederik Mikkelsen
 * Heidi Pi Jensen
