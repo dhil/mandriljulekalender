@@ -20,4 +20,8 @@ gjort tilgængelige og vedligeholdt af [Asger Bjørn
 Jørgensen](https://www.youtube.com/c/AsgerBj%C3%B8rnJ%C3%B8rgensen/about). Asger Bjørn
 Jørgensen er ikke involveret i dette projekt.
 
+## Bidragydere
 
+* Daniel Hillerström
+* Frederik Mikkelsen
+* Heidi Pi Jensen
