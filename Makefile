@@ -5,4 +5,5 @@ publish: index.html static js
 	git checkout master -- js
 	git add index.html static/ js/
 	git commit -m "Publish application update"
+	git push origin gh-pages
 	git checkout master
