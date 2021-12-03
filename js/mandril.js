@@ -128,8 +128,8 @@ const Calendar = (function() {
 const Door = (function() {
     const descriptions = [ "Casper får besøg af Asger Debono, som lægger lækkerier ud på foderbrættet.",
 			   "Casper får besøg af Jørgen Ingemann, der får besøg af Julemanden som den første hvert år.",
-			   "Endnu engang besøg af Asger Debono der ved hvad der rører sig inden for halm.",
-			   "Casper får besøg af Chacha Jublenn der ved alt om post.",
+			   "Casper får endnu engang besøg af Asger Debono, der ved hvad der rører sig inden for halm.",
+			   "Casper får besøg af Chacha Jublenn, der ved alt om post.",
 			   "Casper får besøg af Hr. Vellemand, der aldrig har fået lige det han ønskede sig.",
 			   "Casper får besøg af Cosy Joe, en af de 8000 vise mænd.",
 			   "Casper får besøg af Doby Slinger, som aldrig bliver fortalt noget.",
