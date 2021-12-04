@@ -179,6 +179,7 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-*.userprefs
-
 .DS_Store
+
+# IDEA
+.idea/
