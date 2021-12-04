@@ -3,7 +3,9 @@
  */
 body {
     background: url(../images/julemandril-1.png) no-repeat center #005eee;
-    min-height: 100vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
 }
 
 @media only screen and ((max-width:800px) or (max-height: 500px)) {
@@ -302,20 +304,20 @@ label:hover .door {
 /* Container for the snackbar */
 .snackbar-container {
     width: 100%;
-    padding: 16px;
-    display: flex;
     justify-content: center;
     text-align: center;
+    z-index: 10;
+    position: absolute;
 }
 
 /* The actual snackbar style */
 #snackbar {
+    height: 16px !important;
     visibility: hidden;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 16px;
-    z-index: 1;
     width: 100wh;
 }
 
