@@ -64,7 +64,7 @@ const Calendar = (function() {
      * positions to actual door numbers, whilst the states bit vector
      * encodes whether the nth grid cell has been opened.
      */
-    const make = function(layout, states) {
+    const make = function(resetDate, layout, states) {
         if (layout == null) {
             layout = [...Array(25).keys()].map((i) => i + 1);
             // Shuffle layout
@@ -75,8 +75,9 @@ const Calendar = (function() {
         }
 
         if (states == null) states = 0;
+        if (resetDate == null) resetDate = new Date((new Date().getFullYear() + 1) + "-01-31"); // End of next January.
 
-        return {'layout': layout, 'states': states};
+        return {'resetDate': resetDate, 'layout': layout, 'states': states};
     };
 
     const isOpen = function(calendar, doorN) {
@@ -103,18 +104,18 @@ const Calendar = (function() {
         // The layout array is encoded as a string, where each single
         // digit number is prefixed with a zero.
         let layoutEncoded = calendar.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
-        let stateEncoded = layoutEncoded + "," + calendar.states;
+        let stateEncoded = [resetDate, layoutEncoded, calendar.states].join(",");
         return stateEncoded;
     };
 
     const deserialise = function(serialised) {
-        let [doorLayout, doorStates] = serialised.split(',');
+        let [resetDate, doorLayout, doorStates] = serialised.split(',');
         doorLayout = doorLayout.match(/.{1,2}/g);
-        return make(doorLayout.map((door) => door | 0), doorStates | 0);
+        return make(new Date(resetDate), doorLayout.map((door) => door | 0), doorStates | 0);
     };
 
     const persist = function(key, calendar) {
-        const expirationDate = new Date((new Date().getFullYear() + 1) + "-01-31");
+        const expirationDate = new Date($calendar.resetDate);
         Cookie.set(key, serialise(calendar), expirationDate);
         return;
     };
@@ -200,7 +201,6 @@ const Door = (function() {
             let doorDate = new Date(new Date().getFullYear(), 11, doorNumber);
             if (doorDate <= currentDate || (!Calendar.allClosed($calendar) && new Date().getMonth() === 0)) {
                 Calendar.open($calendar, gridPosition);
-                Calendar.persist($stateName, $calendar);
                 return {'tag': OPEN};
             } else {
                 return {'tag': TOO_EARLY};
@@ -257,7 +257,7 @@ const Page = (function() {
         if (Cookie.has($stateName)) {
             $calendar = Calendar.deserialise(Cookie.get($stateName));
         } else {
-            $calendar = Calendar.make();
+            $calendar = Calendar.make(null, null, null);
             Calendar.persist($stateName, $calendar);
         }
         return render();
@@ -305,6 +305,7 @@ const Page = (function() {
         switch (response.tag) {
         case Door.Response.OPEN:
             cell.checked = true;
+            Calendar.persist($stateName, $calendar);
             break;
         case Door.Response.ALREADY_OPEN:
             // Show video modal
