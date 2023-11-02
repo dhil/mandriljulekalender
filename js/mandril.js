@@ -47,9 +47,7 @@ const Snackbar = (function() {
 
     const notify = function(msg, seconds = 3) {
         // Clear any previous timeout
-        if (snackbarTimeout !== null) {
-            clearTimeout(snackbarTimeout);
-        }
+        if (snackbarTimeout !== null) clearTimeout(snackbarTimeout);
 
         let snackbar = document.getElementById("snackbar");
         snackbar.innerHTML = msg;
