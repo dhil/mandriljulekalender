@@ -111,7 +111,7 @@ const Calendar = (function() {
         // The layout array is encoded as a string, where each single
         // digit number is prefixed with a zero.
         let layoutEncoded = calendar.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
-        let stateEncoded = [layoutEncoded, calendar.states, resetDate].join(",");
+        let stateEncoded = [layoutEncoded, calendar.states, calendar.resetDate].join(",");
         return stateEncoded;
     };
 
