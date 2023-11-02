@@ -43,12 +43,21 @@ const Cookie = (function() {
 
 // Snackbar interaction
 const Snackbar = (function() {
+    let snackbarTimeout = null;
+
     const notify = function(msg, seconds = 3) {
+        // Clear any previous timeout
+        if (snackbarTimeout !== null) {
+            clearTimeout(snackbarTimeout);
+        }
+
         let snackbar = document.getElementById("snackbar");
         snackbar.innerHTML = msg;
         snackbar.className = "show";
+
         // After `seconds` hide the snackbar
-        setTimeout(function() {
+        // Store timeout to cancel it if user is a child and spams the button
+        snackbarTimeout = setTimeout(function() {
             snackbar.className = snackbar.className.replace("show", "");
         }, seconds * 1000);
         return;
