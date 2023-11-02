@@ -5,12 +5,13 @@ html {
     height: 100%;
 }
 body {
-    background: url(../images/julemandril-1.png) no-repeat center center #005eee;
-    background-size: contain;
+    background: #005eee;
     height: 100%;
 }
 
 .calendar-grid {
+    background: url(../images/julemandril-1.png) no-repeat center center;
+    background-size: contain;
     padding: 10px;
     display: grid;
     justify-content: center;
@@ -18,6 +19,7 @@ body {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+    max-height: 1024px;
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
