@@ -104,14 +104,21 @@ const Calendar = (function() {
         // The layout array is encoded as a string, where each single
         // digit number is prefixed with a zero.
         let layoutEncoded = calendar.layout.map((door) => door < 10 ? "0" + door : door + "").join("");
-        let stateEncoded = [resetDate, layoutEncoded, calendar.states].join(",");
+        let stateEncoded = [layoutEncoded, calendar.states, resetDate].join(",");
         return stateEncoded;
     };
 
     const deserialise = function(serialised) {
-        let [resetDate, doorLayout, doorStates] = serialised.split(',');
+        let [doorLayout, doorStates, resetDate] = serialised.split(',');
+        // For backwards compatibility with the previous serialisation
+        // format (prior to commit
+        // 1425c4029bf393cd09cc77c3cc5e0742435e027a) we need to check
+        // whether `resetDate` is non-null in which case we
+        // instantiate a date object, otherwise we defer instantiation
+        // to the `make` function.
+        if (resetDate != null) resetDate = new Date(resetDate);
         doorLayout = doorLayout.match(/.{1,2}/g);
-        return make(new Date(resetDate), doorLayout.map((door) => door | 0), doorStates | 0);
+        return make(resetDate, doorLayout.map((door) => door | 0), doorStates | 0);
     };
 
     const persist = function(key, calendar) {
