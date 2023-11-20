@@ -295,7 +295,7 @@ label:hover .door {
 /* The actual snackbar style */
 #snackbar {
     /* height: 16px !important; */
-    /* visibility: hidden; */
+    visibility: hidden;
     opacity: 0.85;
     background-color: #333;
     color: #fff;

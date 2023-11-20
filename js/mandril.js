@@ -347,6 +347,7 @@ const Page = (function() {
 })();
 
 // Quotes
+// quotes are borrowed from https://github.com/jbakchr/mandril-quotes/blob/main/lib/quotes.json
 const Quotes = (function() {
     let quotes = null;
 
@@ -366,7 +367,6 @@ const Quotes = (function() {
 
     const getRandom = function() {
         const randomIndex = getRandomNumber(0, quotes.length);
-        console.log(randomIndex);
         return quotes[randomIndex];
     }
 
