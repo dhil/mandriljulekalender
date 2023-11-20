@@ -284,10 +284,19 @@ label:hover .door {
     position: absolute;
 }
 
+.snackbar-static-text {
+    padding-bottom: 10px !important;
+}
+
+.snackbar-quote {
+    font-style: italic;
+}
+
 /* The actual snackbar style */
 #snackbar {
-    height: 16px !important;
-    visibility: hidden;
+    /* height: 16px !important; */
+    /* visibility: hidden; */
+    opacity: 0.85;
     background-color: #333;
     color: #fff;
     text-align: center;
