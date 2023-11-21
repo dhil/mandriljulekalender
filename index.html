@@ -11,241 +11,252 @@
     <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="static/css/mandrilstyle.css">
+    <link rel="preload" as="image" imagesrcset="static/images/julemandril-1.png">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q128X2N8H8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Q128X2N8H8');
+    </script>
   </head>
   <body onload="Page.initialise();">
-    <div id="page-wrap">
-      <!-- The actual snackbar -->
-      <div class="snackbar-frame">
-        <div id="snackbar">Hov, hov pilfinger. Denne låge må ikke åbnes endnu!</div>
+    <!-- The actual snackbar -->
+    <div class="snackbar-container">
+      <div id="snackbar">
+        <div class="snackbar-static-text">Denne låge må ikke åbnes endnu!</div>
+        <div id="snackbar-text" class="snackbar-quote">Hov, hov pilfinger.</div>
+        <div id="snackbar-origin" class="snackbar-quote">- Character</div>
       </div>
-      <div class="calendar-frame">
-        <div id="calendar" class="calendar-grid">
-          <div id="door-1">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 0);">
-              <div class="door">
-                <div class="front">1</div>
-                <div class="back"></div>
-              </div>
-            </label>
+    </div>
+    <div id="calendar" class="calendar-grid">
+      <div id="door-1">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 0);">
+          <div class="door">
+            <div class="front">1</div>
+            <div class="back"></div>
           </div>
-          <div id="door-2">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 1);">
-              <div class="door">
-                <div class="front">2</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-2">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 1);">
+          <div class="door">
+            <div class="front">2</div>
+            <div class="back"></div>
           </div>
-          <div id="door-3">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 2);">
-              <div class="door">
-                <div class="front">3</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-3">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 2);">
+          <div class="door">
+            <div class="front">3</div>
+            <div class="back"></div>
           </div>
-          <div id="door-4">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 3);">
-              <div class="door">
-                <div class="front">4</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-4">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 3);">
+          <div class="door">
+            <div class="front">4</div>
+            <div class="back"></div>
           </div>
-          <div id="door-5">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 4);">
-              <div class="door">
-                <div class="front">5</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-5">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 4);">
+          <div class="door">
+            <div class="front">5</div>
+            <div class="back"></div>
           </div>
-          <div id="door-6">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 5);">
-              <div class="door">
-                <div class="front">6</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-6">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 5);">
+          <div class="door">
+            <div class="front">6</div>
+            <div class="back"></div>
           </div>
-          <div id="door-7">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 6);">
-              <div class="door">
-                <div class="front">7</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-7">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 6);">
+          <div class="door">
+            <div class="front">7</div>
+            <div class="back"></div>
           </div>
-          <div id="door-8">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 7);">
-              <div class="door">
-                <div class="front">8</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-8">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 7);">
+          <div class="door">
+            <div class="front">8</div>
+            <div class="back"></div>
           </div>
-          <div id="door-9">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 8);">
-              <div class="door">
-                <div class="front">9</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-9">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 8);">
+          <div class="door">
+            <div class="front">9</div>
+            <div class="back"></div>
           </div>
-          <div id="door-10">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 9);">
-              <div class="door">
-                <div class="front">10</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-10">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 9);">
+          <div class="door">
+            <div class="front">10</div>
+            <div class="back"></div>
           </div>
-          <div id="door-11">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 10);">
-              <div class="door">
-                <div class="front">11</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-11">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 10);">
+          <div class="door">
+            <div class="front">11</div>
+            <div class="back"></div>
           </div>
-          <div id="door-12">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 11);">
-              <div class="door">
-                <div class="front">12</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-12">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 11);">
+          <div class="door">
+            <div class="front">12</div>
+            <div class="back"></div>
           </div>
-          <div id="door-13">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 12);">
-              <div class="door">
-                <div class="front">13</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-13">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 12);">
+          <div class="door">
+            <div class="front">13</div>
+            <div class="back"></div>
           </div>
-          <div id="door-14">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 13);">
-              <div class="door">
-                <div class="front">14</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-14">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 13);">
+          <div class="door">
+            <div class="front">14</div>
+            <div class="back"></div>
           </div>
-          <div id="door-15">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 14);">
-              <div class="door">
-                <div class="front">15</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-15">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 14);">
+          <div class="door">
+            <div class="front">15</div>
+            <div class="back"></div>
           </div>
-          <div id="door-16">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 15);">
-              <div class="door">
-                <div class="front">16</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-16">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 15);">
+          <div class="door">
+            <div class="front">16</div>
+            <div class="back"></div>
           </div>
-          <div id="door-17">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 16);">
-              <div class="door">
-                <div class="front">17</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-17">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 16);">
+          <div class="door">
+            <div class="front">17</div>
+            <div class="back"></div>
           </div>
-          <div id="door-18">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 17);">
-              <div class="door">
-                <div class="front">18</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-18">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 17);">
+          <div class="door">
+            <div class="front">18</div>
+            <div class="back"></div>
           </div>
-          <div id="door-19">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 18);">
-              <div class="door">
-                <div class="front">19</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-19">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 18);">
+          <div class="door">
+            <div class="front">19</div>
+            <div class="back"></div>
           </div>
-          <div id="door-20">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 19);">
-              <div class="door">
-                <div class="front">20</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-20">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 19);">
+          <div class="door">
+            <div class="front">20</div>
+            <div class="back"></div>
           </div>
-          <div id="door-21">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 20);">
-              <div class="door">
-                <div class="front">21</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-21">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 20);">
+          <div class="door">
+            <div class="front">21</div>
+            <div class="back"></div>
           </div>
-          <div id="door-22">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 21);">
-              <div class="door">
-                <div class="front">22</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-22">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 21);">
+          <div class="door">
+            <div class="front">22</div>
+            <div class="back"></div>
           </div>
-          <div id="door-23">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 22);">
-              <div class="door">
-                <div class="front">23</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-23">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 22);">
+          <div class="door">
+            <div class="front">23</div>
+            <div class="back"></div>
           </div>
-          <div id="door-24">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 23);">
-              <div class="door">
-                <div class="front">24</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-24">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 23);">
+          <div class="door">
+            <div class="front">24</div>
+            <div class="back"></div>
           </div>
-          <div id="door-25">
-            <label>
-              <input type="checkbox" onclick="Page.openDoor(this, 24);">
-              <div class="door">
-                <div class="front">25</div>
-                <div class="back"></div>
-              </div>
-            </label>
+        </label>
+      </div>
+      <div id="door-25">
+        <label>
+          <input type="checkbox" onclick="Page.openDoor(this, 24);">
+          <div class="door">
+            <div class="front">25</div>
+            <div class="back"></div>
           </div>
-        </div>
+        </label>
       </div>
     </div>
     <!-- Video player modal -->

@@ -1,38 +1,30 @@
 /*
  * Stylesheet for mandrilkalenderen
  */
+html {
+    height: 100%;
+}
 body {
-    background: url(../images/julemandril-1.png) no-repeat center #005eee;
-    min-height: 100vh;
-}
-
-@media only screen and ((max-width:800px) or (max-height: 500px)) {
-    body {
-        background-image: url(../images/julemandril-1small.png);
-    }
-}
-
-.calendar-frame {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 99%;
-}
-
-@media only screen and (min-height:1024px) {
-    .calendar-frame {
-        height: 95vh;
-    }
+    background: #005eee;
+    height: 100%;
 }
 
 .calendar-grid {
+    background: url(../images/julemandril-1.png) no-repeat center center;
+    background-size: contain;
+    padding: 10px;
     display: grid;
     justify-content: center;
     text-align: center;
+    box-sizing: border-box;
     width: 100%;
+    height: 100%;
+    max-height: 1024px;
     max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
 
-    grid-template-rows: auto;
+    grid-template-rows: repeat(5, 1fr);;
     grid-gap: 10px;
     grid-template-columns: repeat(5, 1fr);
     grid-template-areas:    "d1     d2      d3      d4      d5"
@@ -47,11 +39,12 @@ body {
 @media only screen and (min-width: 321px) and (max-height: 800px) {
     .calendar-grid {
         grid-gap: 2px;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-areas:    "d1     d2      d3      d4      d5      d6      d7 "
-                                "d8     d9      d10     d11     d12     d13     d14"
-                                "d15    d16     d17     d18     d19     d20     d21"
-                                "d22 d22    d23     d24     d25     d25  t     ";
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-areas:    "d1     d2      d3      d4      d5"
+                                "d6     d7      d8      d9      d10"
+                                "d11    d12     d13     d14     d15"
+                                "d16    d17     d18     d19     d20"
+                                "d21    d22     d23     d24     d25";
     }
 }
 
@@ -137,104 +130,104 @@ body {
 }
 
 .door-1 .back {
-    background: url(../images/1.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/1.png) no-repeat center;
+    background-size: contain;
 }
 .door-2 .back {
-    background: url(../images/2.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/2.png) no-repeat center;
+    background-size: contain;
 }
 .door-3 .back {
-    background: url(../images/3.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/3.png) no-repeat center;
+    background-size: contain;
 }
 .door-4 .back {
-    background: url(../images/4.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/4.png) no-repeat center;
+    background-size: contain;
 }
 .door-5 .back {
-    background: url(../images/5.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/5.png) no-repeat center;
+    background-size: contain;
 }
 .door-6 .back {
-    background: url(../images/6.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/6.png) no-repeat center;
+    background-size: contain;
 }
 .door-7 .back {
-    background: url(../images/7.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/7.png) no-repeat center;
+    background-size: contain;
 }
 .door-8 .back {
-    background: url(../images/8.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/8.png) no-repeat center;
+    background-size: contain;
 }
 .door-9 .back {
-    background: url(../images/9.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/9.png) no-repeat center;
+    background-size: contain;
 }
 .door-10 .back {
-    background: url(../images/10.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/10.png) no-repeat center;
+    background-size: contain;
 }
 .door-11 .back {
-    background: url(../images/11.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/11.png) no-repeat center;
+    background-size: contain;
 }
 .door-12 .back {
-    background: url(../images/12.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/12.png) no-repeat center;
+    background-size: contain;
 }
 .door-13 .back {
-    background: url(../images/13.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/13.png) no-repeat center;
+    background-size: contain;
 }
 .door-14 .back {
-    background: url(../images/14.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/14.png) no-repeat center;
+    background-size: contain;
 }
 .door-15 .back {
-    background: url(../images/15.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/15.png) no-repeat center;
+    background-size: contain;
 }
 .door-16 .back {
-    background: url(../images/16.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/16.png) no-repeat center;
+    background-size: contain;
 }
 .door-17 .back {
-    background: url(../images/17.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/17.png) no-repeat center;
+    background-size: contain;
 }
 .door-18 .back {
-    background: url(../images/18.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/18.png) no-repeat center;
+    background-size: contain;
 }
 .door-19 .back {
-    background: url(../images/19.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/19.png) no-repeat center;
+    background-size: contain;
 }
 .door-20 .back {
-    background: url(../images/20.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/20.png) no-repeat center;
+    background-size: contain;
 }
 .door-21 .back {
-    background: url(../images/21.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/21.png) no-repeat center;
+    background-size: contain;
 }
 .door-22 .back {
-    background: url(../images/22.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/22.png) no-repeat center;
+    background-size: contain;
 }
 .door-23 .back {
-    background: url(../images/23.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/23.png) no-repeat center;
+    background-size: contain;
 }
 .door-24 .back {
-    background: url(../images/24.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/24.png) no-repeat center;
+    background-size: contain;
 }
 .door-25 .back {
-    background: url(../images/25.png) no-repeat center #005eee;
-    background-size: cover;
+    background: url(../images/25.png) no-repeat center;
+    background-size: contain;
 }
 
 label {
@@ -243,23 +236,7 @@ label {
     cursor: pointer;
     display: flex;
     width: 100%;
-    height: 120px;
-    max-width: 182px;
-    max-height: 137px;
-}
-
-@media only screen and (min-width: 321px) and (max-height: 400px) {
-    label {
-        max-width: 92px;
-        max-height: 47px;
-    }
-}
-
-@media only screen and (min-width: 321px) and (max-height: 500px) {
-    label {
-        max-width: 102px;
-        max-height: 57px;
-    }
+    height: 100%;
 }
 
 .door {
@@ -287,7 +264,6 @@ label {
 }
 
 .door .back {
-    background-color: #2e313d;
     transform: rotateY(180deg);
 }
 
@@ -302,20 +278,29 @@ label:hover .door {
 /* Container for the snackbar */
 .snackbar-container {
     width: 100%;
-    padding: 16px;
-    display: flex;
     justify-content: center;
     text-align: center;
+    z-index: 10;
+    position: absolute;
+}
+
+.snackbar-static-text {
+    padding-bottom: 10px !important;
+}
+
+.snackbar-quote {
+    font-style: italic;
 }
 
 /* The actual snackbar style */
 #snackbar {
+    /* height: 16px !important; */
     visibility: hidden;
+    opacity: 0.85;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 16px;
-    z-index: 1;
     width: 100wh;
 }
 
@@ -431,8 +416,7 @@ label:hover .door {
     display: inline-block;
 }
 
-.dialogIsOpen #page-wrap {
-
-  /* Blur and de-color */
-  -webkit-filter: blur(5px) grayscale(50%);
+.dialogIsOpen #calendar {
+    /* Blur and de-color */
+    -webkit-filter: blur(5px) grayscale(50%);
 }
