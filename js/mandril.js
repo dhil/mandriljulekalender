@@ -45,13 +45,18 @@ const Cookie = (function() {
 const Snackbar = (function() {
     let snackbarTimeout = null;
 
-    const notify = function(msg, seconds = 3) {
+    const notify = function(quote, seconds = 3) {
         // Clear any previous timeout
         if (snackbarTimeout !== null) clearTimeout(snackbarTimeout);
 
         let snackbar = document.getElementById("snackbar");
-        snackbar.innerHTML = msg;
         snackbar.className = "show";
+
+        let snackbarText = document.getElementById("snackbar-text");
+        snackbarText.innerHTML = quote.text;
+
+        let snackbarOrigin = document.getElementById("snackbar-origin");
+        snackbarOrigin.innerHTML = "- " + quote.character;
 
         // After `seconds` hide the snackbar
         // Store timeout to cancel it if user is a child and spams the button
@@ -274,6 +279,9 @@ const Page = (function() {
             $calendar = Calendar.make(null, null, null);
             Calendar.persist($stateName, $calendar);
         }
+
+        Quotes.load();
+
         return render();
     };
 
@@ -327,7 +335,8 @@ const Page = (function() {
             break;
         case Door.Response.TOO_EARLY:
             // Display notification
-            Snackbar.notify("Hov, hov pilfinger. Denne låge må ikke åbnes endnu!", 3);
+            const quote = Quotes.getRandom();
+            Snackbar.notify(quote, 3);
             break;
         default:
             throw "Unrecognised door response";
@@ -335,4 +344,37 @@ const Page = (function() {
         return;
     };
     return {'initialise': initialise, 'reset': reset, 'openDoor': openDoor};
+})();
+
+// Quotes
+// quotes are borrowed from https://github.com/jbakchr/mandril-quotes/blob/main/lib/quotes.json
+const Quotes = (function() {
+    let quotes = null;
+
+    const load = async function() {
+        try {
+            const response = await fetch('static/assets/quotes.json');
+            if (!response.ok) {
+              throw new Error('Failed to fetch JSON');
+            }
+            
+            quotes = await response.json();
+          } catch (error) {
+            // Handle fetch or parsing errors
+            console.error('Error fetching/parsing JSON:', error);
+          }
+    }
+
+    const getRandom = function() {
+        const randomIndex = getRandomNumber(0, quotes.length);
+        return quotes[randomIndex];
+    }
+
+    const getRandomNumber = function(min, max) {
+        // Use Math.random() to generate a floating-point number between 0 (inclusive) and 1 (exclusive)
+        // Then scale it to the range by multiplying with the difference and adding the minimum value
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+    return {'load': load, 'getRandom': getRandom}
 })();
