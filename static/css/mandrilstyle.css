@@ -277,6 +277,7 @@ label:hover .door {
 
 /* Container for the snackbar */
 .snackbar-container {
+    pointer-events: none;
     width: 100%;
     justify-content: center;
     text-align: center;
@@ -295,42 +296,14 @@ label:hover .door {
 /* The actual snackbar style */
 #snackbar {
     /* height: 16px !important; */
-    visibility: hidden;
-    opacity: 0.85;
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.5s;
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 16px;
     width: 100wh;
-}
-
-#snackbar.show {
-    visibility: visible; /* Show the snackbar */
-    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
-  However, delay the fade out process for 2.5 seconds */
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-}
-
-/* Animations to fade the snackbar in and out */
-@-webkit-keyframes fadein {
-    from {top: 0; opacity: 0;}
-    to {top: 10; opacity: 1;}
-}
-
-@keyframes fadein {
-    from {top: 0; opacity: 0;}
-    to {top: 0; opacity: 1;}
-}
-
-@-webkit-keyframes fadeout {
-    from {top: 0; opacity: 1;}
-    to {top: 0; opacity: 0;}
-}
-
-@keyframes fadeout {
-    from {top: 0; opacity: 1;}
-    to {top: 0; opacity: 0;}
 }
 
 /* video player modal */

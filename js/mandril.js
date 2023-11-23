@@ -45,13 +45,21 @@ const Cookie = (function() {
 const Snackbar = (function() {
     let snackbarTimeout = null;
 
+    const fadeIn = function(target) {
+        target.style.opacity = 0.85;
+    }
+
+    const fadeOut = function(target) {
+        target.style.opacity = 0;
+    }
+
     const notify = function(quote, seconds = 3) {
         // Clear any previous timeout
         if (snackbarTimeout !== null) clearTimeout(snackbarTimeout);
 
         let snackbar = document.getElementById("snackbar");
-        snackbar.className = "show";
-
+        fadeIn(snackbar)
+        
         let snackbarText = document.getElementById("snackbar-text");
         snackbarText.innerHTML = quote.text;
 
@@ -61,7 +69,7 @@ const Snackbar = (function() {
         // After `seconds` hide the snackbar
         // Store timeout to cancel it if user is a child and spams the button
         snackbarTimeout = setTimeout(function() {
-            snackbar.className = snackbar.className.replace("show", "");
+            fadeOut(snackbar)
         }, seconds * 1000);
         return;
     };
@@ -336,7 +344,7 @@ const Page = (function() {
         case Door.Response.TOO_EARLY:
             // Display notification
             const quote = Quotes.getRandom();
-            Snackbar.notify(quote, 3);
+            Snackbar.notify(quote, 8);
             break;
         default:
             throw "Unrecognised door response";
