@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Publish to gh-pages
 
 on:
   push:
@@ -14,6 +14,8 @@ jobs:
 
     - name: publish
       run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "publish action"
         git fetch --all
         git checkout gh-pages
         git checkout master -- index.html
