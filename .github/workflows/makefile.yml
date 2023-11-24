@@ -14,6 +14,7 @@ jobs:
 
     - name: publish
       run: |
+        git fetch --all
         git checkout gh-pages
         git checkout master -- index.html
         git checkout master -- static
