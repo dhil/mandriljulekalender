@@ -5,6 +5,7 @@
 // Globals to maintain calendar state
 let $calendar = null;
 const $stateName = "calendarState";
+const development = false; // Set to true to enable opening of all doors
 
 // Manipulation of cookies
 const Cookie = (function() {
@@ -226,7 +227,7 @@ const Door = (function() {
         } else {
             let currentDate = new Date().getTime();
             let doorDate = new Date(new Date().getFullYear(), 11, doorNumber);
-            if (doorDate <= currentDate || (!Calendar.allClosed($calendar) && new Date().getMonth() === 0)) {
+            if (development || doorDate <= currentDate || (!Calendar.allClosed($calendar) && new Date().getMonth() === 0)) {
                 Calendar.open($calendar, gridPosition);
                 return {'tag': OPEN};
             } else {
