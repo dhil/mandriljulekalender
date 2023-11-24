@@ -73,6 +73,27 @@ const Snackbar = (function() {
         }, seconds * 1000);
         return;
     };
+
+    const notify1 = function(quote, seconds = 3) {
+        // Clear any previous timeout
+        if (snackbarTimeout !== null) clearTimeout(snackbarTimeout);
+
+        let snackbar = document.getElementById("snackbar");
+        fadeIn(snackbar)
+        
+        let snackbarText = document.getElementById("snackbar-text");
+        snackbarText.innerHTML = quote.text;
+
+        let snackbarOrigin = document.getElementById("snackbar-origin");
+        snackbarOrigin.innerHTML = "- " + quote.character;
+
+        // After `seconds` hide the snackbar
+        // Store timeout to cancel it if user is a child and spams the button
+        snackbarTimeout = setTimeout(function() {
+            fadeOut(snackbar)
+        }, seconds * 1000);
+        return;
+    };
     return {'notify': notify};
 })();
 
