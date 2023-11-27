@@ -1,19 +1,21 @@
-var particleCount = 200;
-var particleMax   = 1000;
-var sky           = document.body;
-var canvas        = document.createElement('canvas');
-var ctx           = canvas.getContext('2d');
-var width         = sky.clientWidth;
-var height        = sky.clientHeight;
-var i             = 0;
-var active        = false;
-var snowflakes    = [];
-var snowflake;
+"use strict";
+
+let particleCount = 200;
+let particleMax   = 1000;
+let sky           = document.body;
+let canvas        = document.createElement('canvas');
+let ctx           = canvas.getContext('2d');
+let width         = sky.clientWidth;
+let height        = sky.clientHeight;
+let i             = 0;
+let active        = false;
+let snowflakes    = [];
+let snowflake;
 
 canvas.style.position = 'absolute';
 canvas.style.left = canvas.style.top = '0';
 
-var Snowflake = function () {
+let Snowflake = function () {
   this.x = 0;
   this.y = 0;
   this.vy = 0;
@@ -46,7 +48,7 @@ generateSnowFlakes();
 function update() {
   ctx.clearRect(0, 0, width, height);
 
-  if (!active) {      
+  if (!active) {
     return;
   }
 
@@ -66,7 +68,7 @@ function update() {
     }
   }
 
-  requestAnimFrame(update);
+  window.requestAnimFrame(update);
 }
 
 function onResize() {
@@ -76,11 +78,11 @@ function onResize() {
   canvas.height = height;
   ctx.fillStyle = '#FFF';
 
-  var wasActive = active;
+  let wasActive = active;
   active = true;
 
   if (!wasActive && active) {
-    requestAnimFrame(update);
+    window.requestAnimFrame(update);
   }
 }
 
