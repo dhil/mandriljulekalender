@@ -1,3 +1,4 @@
+"use strict";
 /*
  * Dynamic calendar rendering
  */
@@ -37,7 +38,7 @@ const Cookie = (function() {
     const forget = function(key) {
         document.cookie = key + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;SameSite=lax;path=/";
         return;
-    }
+    };
 
     return {'get': get, 'set': set, 'has': has, 'forget': forget};
 })();
@@ -48,19 +49,21 @@ const Snackbar = (function() {
 
     const fadeIn = function(target) {
         target.style.opacity = 0.85;
-    }
+        return;
+    };
 
     const fadeOut = function(target) {
         target.style.opacity = 0;
-    }
+        return;
+    };
 
     const notify = function(quote, seconds = 3) {
         // Clear any previous timeout
         if (snackbarTimeout !== null) clearTimeout(snackbarTimeout);
 
         let snackbar = document.getElementById("snackbar");
-        fadeIn(snackbar)
-        
+        fadeIn(snackbar);
+
         let snackbarText = document.getElementById("snackbar-text");
         snackbarText.innerHTML = quote.text;
 
@@ -70,7 +73,7 @@ const Snackbar = (function() {
         // After `seconds` hide the snackbar
         // Store timeout to cancel it if user is a child and spams the button
         snackbarTimeout = setTimeout(function() {
-            fadeOut(snackbar)
+            return fadeOut(snackbar);
         }, seconds * 1000);
         return;
     };
@@ -107,14 +110,14 @@ const Calendar = (function() {
 
     const allClosed = function(calendar) {
         return calendar.states === 0;
-    }
+    };
 
     const open = function(calendar, doorN) {
         if (calendar.locked) return;
 
         calendar.states |= (1 << doorN);
         return;
-    }
+    };
 
     const doorAt = function(calendar, position) {
         return calendar.layout[position];
@@ -223,7 +226,7 @@ const Door = (function() {
             return { 'tag': ALREADY_OPEN
                    , 'episode': doorNumber
                    , 'episodeDescription': descriptions[doorNumber - 1]
-                   , 'videoId': videoIds[doorNumber - 1]}
+                   , 'videoId': videoIds[doorNumber - 1]};
         } else {
             let currentDate = new Date().getTime();
             let doorDate = new Date(new Date().getFullYear(), 11, doorNumber);
@@ -301,7 +304,7 @@ const Page = (function() {
 
     let locked = false;
     const freeze = function() { locked = true; return; };
-    const unfreeze = function() { locked = false; return };
+    const unfreeze = function() { locked = false; return; };
 
     function showVideoPlayer(episode, description, videoId) {
         // Freeze and blur background
@@ -325,7 +328,7 @@ const Page = (function() {
             body.innerHTML = "";
             document.body.className = document.body.className.replace("dialogIsOpen","");
             unfreeze();
-        }
+        };
         modal.style.display = "block";
     }
 
@@ -366,24 +369,24 @@ const Quotes = (function() {
             if (!response.ok) {
               throw new Error('Failed to fetch JSON');
             }
-            
+
             quotes = await response.json();
           } catch (error) {
             // Handle fetch or parsing errors
             console.error('Error fetching/parsing JSON:', error);
           }
-    }
+    };
 
     const getRandom = function() {
         const randomIndex = getRandomNumber(0, quotes.length);
         return quotes[randomIndex];
-    }
+    };
 
     const getRandomNumber = function(min, max) {
         // Use Math.random() to generate a floating-point number between 0 (inclusive) and 1 (exclusive)
         // Then scale it to the range by multiplying with the difference and adding the minimum value
         return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
+    };
 
-    return {'load': load, 'getRandom': getRandom}
+    return {'load': load, 'getRandom': getRandom};
 })();
