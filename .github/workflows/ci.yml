@@ -30,4 +30,4 @@ jobs:
         run: npm exec jshint -- --config js/jshint.config.json --show-non-errors js/mandril.js
 
       - name: JSHint snow.js
-        run: npm exec jshint -- --config js/jshint.config.json --show-non-errors js/show.js
+        run: npm exec jshint -- --config js/jshint.config.json --show-non-errors js/snow.js
