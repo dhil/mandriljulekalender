@@ -1,0 +1,33 @@
+name: Mandril integration!
+
+on:
+  pull_request:
+    branches: master
+    paths: [ js/** ]
+  push:
+    branches: [master]
+    paths: [ js/** ]
+  schedule:
+    # Prime the caches every Monday
+    - cron: 0 1 * * MON
+
+jobs:
+  jslint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup NPM
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install jshint
+        run: npm install jshint
+
+      - name: JSHint mandril.js
+        run: npm exec jshint -- --config js/jshint.config.json --show-non-errors js/mandril.js
+
+      - name: JSHint snow.js
+        run: npm exec jshint -- --config js/jshint.config.json --show-non-errors js/show.js
