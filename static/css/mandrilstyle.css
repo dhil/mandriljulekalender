@@ -5,7 +5,7 @@ html {
     height: 100%;
 }
 body {
-    background: #1166D0;
+    background: #005eee;
     height: 100%;
     font-family: 'Kalam', cursive;
 }
@@ -15,7 +15,7 @@ canvas {
 }
 
 .calendar-grid {
-    background: url(../images/julemandril-1.jpg) no-repeat center center;
+    background: url(../images/julemandril-1.png) no-repeat center center;
     background-size: contain;
     padding: 10px;
     display: grid;
