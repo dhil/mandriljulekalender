@@ -377,15 +377,12 @@ const Quotes = (function() {
           }
     };
 
+    let last = -1;
     const getRandom = function() {
-        const randomIndex = getRandomNumber(0, quotes.length);
-        return quotes[randomIndex];
-    };
-
-    const getRandomNumber = function(min, max) {
-        // Use Math.random() to generate a floating-point number between 0 (inclusive) and 1 (exclusive)
-        // Then scale it to the range by multiplying with the difference and adding the minimum value
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        const i = Math.floor(Math.random() * quotes.length);
+        // Ensures that we don't display the same quote twice in a row.
+        last = i == last ? (i + 1) % quotes.length : i;
+        return quotes[last];
     };
 
     return {'load': load, 'getRandom': getRandom};
