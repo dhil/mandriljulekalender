@@ -305,6 +305,16 @@ const Page = (function() {
     let locked = false;
     const freeze = function() { locked = true; return; };
     const unfreeze = function() { locked = false; return; };
+    const checkIsModal = function(target) {
+        if (target.id === "videoplayer") {
+            return true;
+        }
+        if (target.localName === "body") {
+            return false;
+        }
+
+        return checkIsModal(target.parentNode);
+    }
 
     function showVideoPlayer(episode, description, videoId) {
         // Freeze and blur background
@@ -315,20 +325,33 @@ const Page = (function() {
         let modal = document.getElementById("videoplayer");
 
         // Get the <span> element that closes the modal
-        let span = document.getElementsByClassName("close")[0];
+        let closeButton = document.getElementsByClassName("close")[0];
 
         // Add episode description along with an embedded YouTube video frame to the modal body
-        let body = document.getElementsByClassName("modal-body")[0];
-        body.innerHTML = "<p>" + description + "</p><iframe class=\"embedded-player\" src=\"https://www.youtube.com/embed/" + videoId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+        let modalBody = document.getElementsByClassName("modal-body")[0];
+        modalBody.innerHTML = "<p>" + description + "</p><iframe class=\"embedded-player\" src=\"https://www.youtube.com/embed/" + videoId + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
         document.getElementById("video-title").innerHTML = "Afsnit " + episode;
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        let closeModal = function() {
             modal.style.display = "none";
-            body.innerHTML = "";
+            modalBody.innerHTML = "";
+            window.onclick = null;
             document.body.className = document.body.className.replace("dialogIsOpen","");
             unfreeze();
         };
+
+        closeButton.onclick = closeModal;
+        window.onclick = function(_event) {
+            if (_event.target.type === "checkbox") {
+                return;
+            }
+            if (!checkIsModal(_event.target)) { // if we are clicking outside the modal close the modal
+                _event.preventDefault();
+                closeModal();
+            }
+        }
+
         modal.style.display = "block";
     }
 
