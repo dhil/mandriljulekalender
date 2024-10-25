@@ -15,15 +15,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="static/css/mandrilstyle.css">
     <link rel="preload" as="image" imagesrcset="static/images/julemandril-1.png">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q128X2N8H8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Q128X2N8H8');
-    </script>
   </head>
   <body onload="Page.initialise();">
     <!-- The actual snackbar -->
@@ -274,9 +265,15 @@
       </div>
     </div>
     <!-- Scripts -->
-    <script type="text/javascript" src="js/mandril.js">
+    <script type="text/javascript" src="js/mandril.js" async>
     </script>
-    <script type="text/javascript" src="js/snow.js">
+    <script type="text/javascript" src="js/snow.js" async>
+    </script>
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+          console.log("loaded");
+          return Snow.start();
+      });
     </script>
   </body>
 </html>
