@@ -34,10 +34,9 @@ const Snow = (function() {
     //     float32_t opacity;
     // };
     //
-    // We use a compact encoding of snowflakes by flattening them into two
-    // typed arrays:
-    // Int32Array(5 * MAX_SNOWFLAKES) // [0,...,4,...,i,...,i+4,...,MAX_SNOWFLAKES-1] stores x, y, vx, vy, r in order.
-    // Float32Array(MAX_SNOWFLAKES);  // [0,...,i,...,MAX_SNOWFLAKES-1] stores the opacity field
+    // We use a compact encoding of snowflakes by flattening them into
+    // a single typed array:
+    // Float32Array(6 * MAX_SNOWFLAKES) // [0,...,5,...,i,...,i+5,...,MAX_SNOWFLAKES-1] stores x, y, vx, vy, r, opacity in order.
 
     function snowflakeReset(i, width, height) {
         // x
