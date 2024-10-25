@@ -137,8 +137,13 @@ const Snow = (function() {
         STOP = true;
     }
 
+    function isActive() {
+        return ACTIVE;
+    }
+
     return {'start': snowStart, // Starts the animations
             'stop': snowStop,   // Stops the animations
+            'isActive': isActive,
             'toggleFPS': function() { // Toggles FPS display
                 SHOW_FPS = !SHOW_FPS;
             }};

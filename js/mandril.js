@@ -1,3 +1,4 @@
+/*Snow*/
 "use strict";
 /*
  * Dynamic calendar rendering
@@ -41,6 +42,48 @@ const Cookie = (function() {
     };
 
     return {'get': get, 'set': set, 'has': has, 'forget': forget};
+})();
+
+const Options = (function() {
+    const menu = document.getElementById("menu");
+    const menuButton = document.getElementById("menuButton");
+
+    let menuOpen = false;
+
+    let showMenu = function() {
+        menu.style.width = "auto";
+        menuOpen = true;
+    };
+
+    let hideMenu = function(event) {
+        if (event.target === menuButton) return;
+
+        menu.style.width = "0";
+        menuOpen = false;
+    };
+
+    const toggleMenu = function() {
+        if (menuOpen) {
+            hideMenu();
+        } else {
+            showMenu();
+        }
+    };
+
+    const toggleSnow = function () {
+        let toggleSnowOption = document.getElementById("toggleSnowOption");
+        if (Snow.isActive()) {
+            Snow.stop();
+            toggleSnowOption.innerHTML = "Vis Sne";
+        } else {
+            Snow.start();
+            toggleSnowOption.innerHTML = "Skjul Sne";
+        }
+
+        hideMenu();
+    };
+
+    return {'toggleMenu': toggleMenu, 'toggleSnow': toggleSnow, 'hideMenu': hideMenu, 'showMenu': showMenu};
 })();
 
 // Snackbar interaction
@@ -294,6 +337,10 @@ const Page = (function() {
 
         Quotes.load();
 
+        window.addEventListener('click', function(event) {
+            Options.hideMenu(event);
+        });
+
         return render();
     };
 
@@ -353,7 +400,7 @@ const Page = (function() {
         }
 
         modal.style.display = "block";
-    }
+    };
 
     const openDoor = function(cell, position) {
         cell.checked = Calendar.isOpen($calendar, position); // inhibit the event
