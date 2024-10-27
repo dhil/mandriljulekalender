@@ -15,15 +15,6 @@
     <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="static/css/mandrilstyle.css">
     <link rel="preload" as="image" imagesrcset="static/images/julemandril-1.png">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q128X2N8H8"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-Q128X2N8H8');
-    </script>
   </head>
   <body onload="Page.initialise();">
     <!-- The actual snackbar -->
@@ -34,6 +25,17 @@
         <div id="snackbar-origin" class="snackbar-quote">- Character</div>
       </div>
     </div>
+    <div>
+      <button id="menuButton" onclick="Options.toggleMenu()" class="menu-btn">⛭</button>
+      <div id="menu" class="menu">
+          <ul>
+            <li><a id="toggleSnowOption" href="#" onclick="Options.toggleSnow()">Skjul Sne</a></li>
+            <li><a id="toggleSnowOption" href="https://github.com/dhil/mandriljulekalender" target="_blank">Om kalenderen</a></li>
+          </ul>
+      </div>
+    </div>
+
+
     <div id="calendar" class="calendar-grid">
       <div id="door-1">
         <label>
@@ -274,9 +276,15 @@
       </div>
     </div>
     <!-- Scripts -->
-    <script type="text/javascript" src="js/mandril.js">
+    <script type="text/javascript" src="js/mandril.js" async>
     </script>
-    <script type="text/javascript" src="js/snow.js">
+    <script type="text/javascript" src="js/snow.js" async>
+    </script>
+    <script type="text/javascript">
+      window.addEventListener('load', function() {
+          console.log("loaded");
+          return Snow.start();
+      });
     </script>
   </body>
 </html>
