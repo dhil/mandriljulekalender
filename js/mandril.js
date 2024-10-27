@@ -361,7 +361,7 @@ const Page = (function() {
         }
 
         return checkIsModal(target.parentNode);
-    }
+    };
 
     function showVideoPlayer(episode, description, videoId) {
         // Freeze and blur background
@@ -397,10 +397,10 @@ const Page = (function() {
                 _event.preventDefault();
                 closeModal();
             }
-        }
+        };
 
         modal.style.display = "block";
-    };
+    }
 
     const openDoor = function(cell, position) {
         cell.checked = Calendar.isOpen($calendar, position); // inhibit the event
