@@ -18,5 +18,7 @@
     "laxcomma": true,
 
     // Global variables whitelist
-    "globals": {}
+    "globals": {
+        "Snow": true
+    }
 }

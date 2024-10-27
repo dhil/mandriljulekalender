@@ -432,3 +432,48 @@ label:hover .door {
     /* Blur and de-color */
     -webkit-filter: blur(5px) grayscale(50%);
 }
+
+/* Style for the menu */
+.menu {
+    width: 0;
+    position: fixed;
+    top: 35px;
+    left: 0px;
+    background-color: rgba(69, 69, 69, 0.7);
+    overflow-x: hidden;
+    z-index: 1000; /* Ensures the menu stays on top. Important when doors overlap */
+}
+
+.menu ul {
+    padding-inline-start: 0px;
+}
+
+.menu li {
+    list-style-type: none;
+}
+
+.menu a {
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    display: block;
+    color: #fff;
+    font-family: 'Kalam', cursive;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
+    font-size: small;
+}
+
+.menu a:hover {
+    color: #f1f1f1;
+}
+
+.menu-btn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    position: absolute;
+    top: 5px;
+    z-index: 1000; /* Ensures the menu stays on top. Important when doors overlap */
+}
