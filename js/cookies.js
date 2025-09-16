@@ -1,7 +1,4 @@
-// Utility/helper functions
-// ...to be filled with relevant code from mandril.js...
-
-// Cookie handling utility
+// Cookie handling
 const Cookie = (function () {
   const get = function (name) {
     // Split into key-value pairs
