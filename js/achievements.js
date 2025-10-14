@@ -23,7 +23,7 @@ const Achievements = (function () {
     },
     {
       id: "all25",
-      title: "25 dage senere",
+      title: "Så dæ' jul igen!",
       desc: "Åbn alle 25 låger.",
       icon: "🎄",
     },
@@ -60,14 +60,14 @@ const Achievements = (function () {
     },
     {
       id: "lastDoor",
-      title: "Fergie’s Velsignelse",
+      title: "Fergie's Velsignelse",
       desc: "Åbn den sidste låge (25).",
       icon: "👼",
     },
     {
       id: "misorder10",
-      title: "Julian Tisange’s Reformpakke",
-      desc: "Åbn låger i ‘forkert’ rækkefølge mindst 10 gange.",
+      title: "Julian Tisange's Reformpakke",
+      desc: "Åbn lågerne i en ikke-monoton rækkefølge 10 gange.",
       icon: "🔀",
     },
 
@@ -80,7 +80,7 @@ const Achievements = (function () {
     },
     {
       id: "multiDay3",
-      title: "Asger Debono’s Halmpris",
+      title: "Asger Debono's Halmpris",
       desc: "Brug kalenderen på tre forskellige dage.",
       icon: "📅",
     },
@@ -100,7 +100,7 @@ const Achievements = (function () {
     // Meta-meta
     {
       id: "grandMaster",
-      title: "Mandril-mester",
+      title: "Brasiliens dreng",
       desc: "Lås op for alle andre achievements.",
       icon: "🏆",
     },
@@ -379,27 +379,27 @@ const Achievements = (function () {
   }
 
   function renderAchievementsGrid() {
-    let root = document.getElementById("achievements-root");
+    const root = document.getElementById("achievements-root");
     if (!root) return;
-    let grid = root.querySelector("#achievements-grid");
-    let bar = root.querySelector(".achievements-progress-bar > span");
-    let label = root.querySelector(".achievements-progress-label");
+    const grid = root.querySelector("#achievements-grid");
+    const bar = root.querySelector(".achievements-progress-bar > span");
+    const label = root.querySelector(".achievements-progress-label");
 
-    let all = Achievements.getAll();
-    let unlockedSet = new Set(Achievements.getUnlocked());
+    const all = Achievements.getAll();
+    const unlockedSet = new Set(Achievements.getUnlocked());
 
     // Sortér: unlocked først, derefter alfabetisk på titel
     let sorted = all.slice().sort((a, b) => {
-      let au = unlockedSet.has(a.id) ? 0 : 1;
-      let bu = unlockedSet.has(b.id) ? 0 : 1;
+      const au = unlockedSet.has(a.id) ? 0 : 1;
+      const bu = unlockedSet.has(b.id) ? 0 : 1;
       if (au !== bu) return au - bu;
       return a.title.localeCompare(b.title, "da");
     });
 
     // Progress
-    let unlockedCount = unlockedSet.size;
-    let total = all.length;
-    let pct = total ? Math.round((unlockedCount / total) * 100) : 0;
+    const unlockedCount = unlockedSet.size;
+    const total = all.length;
+    const pct = total ? Math.round((unlockedCount / total) * 100) : 0;
     if (bar) bar.style.width = pct + "%";
     if (label) label.textContent = `${unlockedCount} / ${total}`;
 
