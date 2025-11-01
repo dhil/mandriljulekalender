@@ -8,7 +8,7 @@ const Options = (function () {
     menuOpen = true;
   };
   let hideMenu = function (event) {
-    if (event.target === menuButton) return;
+    if (event && event.target === menuButton) return;
     menu.style.width = "0";
     menuOpen = false;
   };
@@ -28,13 +28,20 @@ const Options = (function () {
       Snow.start();
       toggleSnowOption.innerHTML = "Skjul Sne";
     }
+
+    Achievements.trackSnowToggle();
+
     hideMenu();
+  };
+  const showAchievements = function () {
+    Achievements.showAchievementsModal();
   };
   return {
     toggleMenu: toggleMenu,
     toggleSnow: toggleSnow,
     hideMenu: hideMenu,
     showMenu: showMenu,
+    showAchievements: showAchievements,
   };
 })();
 window.Options = Options;

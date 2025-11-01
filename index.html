@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="da">
+
   <head>
     <meta charset="utf-8">
     <meta name="author" content="Daniel Hillerström, Frederik Mikkelsen, and Heidi Pi Jensen">
-    <meta name="keywords" content="julekalender, casper og mandrilaftalen, casper og drengene fra brasilien, mandrilkalenderen">
+    <meta name="keywords"content="julekalender, casper og mandrilaftalen, casper og drengene fra brasilien, mandrilkalenderen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ho ho ho! Gør julen endnu mere jul med mandriljulekalenderen! 25 lækre overraskelser gemmer sig bag lågerne. God fornøjelse!">
     <title>Mandriljulekalenderen</title>
@@ -16,11 +17,12 @@
     <link rel="stylesheet" type="text/css" href="static/css/mandrilstyle.css">
     <link rel="preload" as="image" imagesrcset="static/images/julemandril-1.png">
   </head>
+
   <body onload="Page.initialise();">
     <!-- The actual snackbar -->
     <div class="snackbar-container">
       <div id="snackbar">
-        <div class="snackbar-static-text">Denne låge må ikke åbnes endnu!</div>
+        <div id="snackbar-title" class="snackbar-title-text">Denne låge må ikke åbnes endnu!</div>
         <div id="snackbar-text" class="snackbar-quote">Hov, hov pilfinger.</div>
         <div id="snackbar-origin" class="snackbar-quote">- Character</div>
       </div>
@@ -29,10 +31,13 @@
     <div>
       <button id="menuButton" onclick="Options.toggleMenu()" class="menu-btn">⛭</button>
       <div id="menu" class="menu">
-          <ul>
-            <li><a id="toggleSnowOption" href="#" onclick="Options.toggleSnow()">Skjul Sne</a></li>
-            <li><a id="toggleSnowOption" href="https://github.com/dhil/mandriljulekalender" target="_blank">Om kalenderen</a></li>
-          </ul>
+        <ul>
+          <li><a id="showAchievementsOption" href="#" onclick="Options.showAchievements()">Vis
+              achievements</a></li>
+          <li><a id="toggleSnowOption" href="#" onclick="Options.toggleSnow()">Skjul Sne</a></li>
+          <li><a id="aboutOption" href="https://github.com/dhil/mandriljulekalender" target="_blank">Om
+              kalenderen</a></li>
+        </ul>
       </div>
     </div>
 
@@ -269,10 +274,33 @@
       <div class="modal-content">
         <div class="modal-header">
           <div class="modal-title-background"></div>
-          <h2 id="video-title">Afsnit</h2>
+          <h2 id="video-title" class="modal-content-title">Afsnit</h2>
           <div class="close">&times;</div>
         </div>
         <div class="modal-body">
+        </div>
+      </div>
+    </div>
+    <!-- Achievement view modal -->
+    <div id="achievements" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title-background"></div>
+          <h2 id="modal-content-title" class="modal-content-title">Afsnit</h2>
+          <div class="close">&times;</div>
+        </div>
+        <div class="modal-body">
+          <div id="achievements-root">
+            <div class="achievements-header">
+              <h3>Fremskridt</h3>
+              <div class="achievements-progress">
+                <div class="achievements-progress-bar"><span></span></div>
+                <div class="achievements-progress-label">0 / 0</div>
+              </div>
+            </div>
+
+            <div class="achievements-grid" id="achievements-grid"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -280,14 +308,16 @@
     <script type="text/javascript" src="js/cookies.js" async></script>
     <script type="text/javascript" src="js/snackbar.js" async></script>
     <script type="text/javascript" src="js/options.js" async></script>
+    <script type="text/javascript" src="js/achievements.js" async></script>
     <script type="text/javascript" src="js/page.js" async></script>
     <script type="text/javascript" src="js/main.js" async></script>
     <script type="text/javascript" src="js/snow.js" async></script>
     <script type="text/javascript">
-      window.addEventListener('load', function() {
-          console.log("loaded");
-          return Snow.start();
+      window.addEventListener('load', function () {
+        console.log("loaded");
+        return Snow.start();
       });
     </script>
   </body>
+
 </html>

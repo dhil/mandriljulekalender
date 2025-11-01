@@ -258,6 +258,7 @@ const Page = (function () {
       Calendar.persist($stateName, $calendar);
     }
     Quotes.load();
+    Achievements.init($calendar.resetDate);
     window.addEventListener("click", function (event) {
       Options.hideMenu(event);
     });
@@ -265,6 +266,7 @@ const Page = (function () {
   };
   const reset = function () {
     Cookie.forget($stateName);
+    Achievements.reset();
     return location.reload();
   };
   let locked = false;
@@ -301,6 +303,7 @@ const Page = (function () {
       '</p><iframe class="embedded-player" src="https://www.youtube.com/embed/' +
       videoId +
       '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    
     document.getElementById("video-title").innerHTML = "Afsnit " + episode;
     // When the user clicks on <span> (x), close the modal
     let closeModal = function () {
@@ -311,6 +314,7 @@ const Page = (function () {
         "dialogIsOpen",
         ""
       );
+      Achievements.trackVideoClosed(videoId, true)
       unfreeze();
     };
     closeButton.onclick = closeModal;
@@ -325,6 +329,7 @@ const Page = (function () {
       }
     };
     modal.style.display = "block";
+    Achievements.trackVideoShown(videoId)
   }
   const openDoor = function (cell, position) {
     cell.checked = Calendar.isOpen($calendar, position); // inhibit the event
@@ -346,11 +351,19 @@ const Page = (function () {
       case Door.Response.TOO_EARLY:
         // Display notification
         const quote = Quotes.getRandom();
-        Snackbar.notify(quote, 8);
+        Snackbar.notify("Denne låge må ikke åbnes endnu!", quote.text, quote.character, 8);
         break;
       default:
         throw "Unrecognised door response";
     }
+
+    Achievements.trackDoorOpen({
+      doorNumber: Calendar.doorAt($calendar, position),
+      now: new Date(),
+      alreadyOpen: cell.checked,
+      wasOpenAction: response.tag === Door.Response.OPEN,
+    });
+
     return;
   };
   return { initialise: initialise, reset: reset, openDoor: openDoor };

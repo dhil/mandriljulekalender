@@ -21,7 +21,7 @@ const Snackbar = (function () {
       snackbarProgress.style.width = "0%";
     }, 10);
   };
-  const notify = function (quote, seconds = 3) {
+  const notify = function (title, text, origin, durationSeconds = 3) {
     if (snackbarTimeout !== null) {
       clearTimeout(snackbarTimeout);
     }
@@ -30,16 +30,24 @@ const Snackbar = (function () {
     }
     fadeIn(snackbar);
     updateProgressTimeout = startProgress();
-    let snackbarText = document.getElementById("snackbar-text");
-    snackbarText.innerHTML = quote.text;
-    let snackbarOrigin = document.getElementById("snackbar-origin");
-    snackbarOrigin.innerHTML = "- " + quote.character;
+    let snackbarTitle = document.getElementById("snackbar-title");
+    
+    if (!title) title = "&nbsp;";
+    snackbarTitle.innerHTML = title;
 
-    // After `seconds` hide the snackbar
+    let snackbarText = document.getElementById("snackbar-text");
+    snackbarText.innerHTML = text;
+
+    if (origin) {
+      let snackbarOrigin = document.getElementById("snackbar-origin");
+      snackbarOrigin.innerHTML = "- " + origin;
+    }
+
+    // After `durationSeconds` hide the snackbar
     // Store timeout to cancel it if user is a child and spams the button
     snackbarTimeout = setTimeout(function () {
       fadeOut(snackbar);
-    }, seconds * 1000);
+    }, durationSeconds * 1000);
     return;
   };
   return { notify: notify };
