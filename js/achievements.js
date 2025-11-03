@@ -356,7 +356,6 @@ const Achievements = (function () {
     // When the user clicks on <span> (x), close the modal
     let closeModal = function () {
       modal.style.display = "none";
-      modalBody.innerHTML = "";
       window.onclick = null;
       document.body.className = document.body.className.replace(
         "dialogIsOpen",
